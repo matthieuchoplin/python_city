@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+## Introduction to programming using Python
+<br>
+Matthieu Choplin
+<br>
+<a href='mailto:matthieu.choplin1@city.ac.uk'>matthieu.choplin1@city.ac.uk</a>
+<br>
+<a href='http://moodle.city.ac.uk/'>http://moodle.city.ac.uk/</a>
+				</section>
+				<section data-markdown>
+### Recommended reading
+* Books:
+ * How to Think Like a Computer Scientist by Allen B. Downey
+ * Introduction to programming using Python by Daniel Liang
+* Website:
+ * The official python tutorial: https://docs.python.org/3/tutorial/
+* See links for the websites and free Python e-books on Moodle.
+				</section>
+				<section data-markdown>
+### Tools
+* IDE: Pycharm
+* Online tools: pythontutor.com
+				</section>
+				<section data-markdown>
+					### Handouts
+					* No handouts will be given.
+					* You can find the handouts online on <a href='http://moodle.city.ac.uk/'>Moodle</a>.
+
+					* Printing
+					* You can print handouts after you purchase credit from the computer shop (Room: E101 Drysdale Building) or by topping up online
+
+					* More info: <a href='https://intranet.city.ac.uk/students/it/it/print.html'>https://intranet.city.ac.uk/students/it/it/print.html</a>
+
+				</section>
+				<section data-markdown>
+### Objectives
+* Think like a programmer.
+* Introduction to Python. Variables. Loops. Main method. Conditional structures. Data structure.
+* Debugging in Python (using pdb, Pycharm). How to read a program.
+* File manipulation: Reading and writing files.
+* Object Oriented programming in Python: classes, objects, inheritance, polymorphism, encapsulation. How to build a modular python program.
+* Introduction to the Python standard library.
+* Testing in Python. Presentation of doctest and unittest.
+* Error handling: exceptions.
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
