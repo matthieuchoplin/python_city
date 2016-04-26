@@ -244,9 +244,13 @@ area = radius * radius * 3.14159 # Compute area
 					Logic error
 					<p>When a program does not perform the way it was intended to.</p>
 					<p>For instance, a wrong formulae for converting pound in kg</p>
-					<pre><code data-trim data-noescape>pound = float(input("Enter weight in pound: "))
+					<pre><code data-trim data-noescape>pounds = float(input("Enter weight in pound: "))
 # convert pound in kilogramme
 kilograms = pounds * 0.454</code></pre>
+					<p>It should be:</p>
+					<pre><code data-trim data-noescape>pounds = float(input("Enter weight in pound: "))
+# convert pound in kilogramme
+kilograms = pounds / 0.454</code></pre>
 				</section>
 				<section>
 					<h3> Exercise 3:</h3>
