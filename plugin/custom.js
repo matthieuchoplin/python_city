@@ -38,16 +38,15 @@ $(document).ready(function() {
 		that.siblings(".solution-content").show();
 		that.hide();
 		that.siblings(".hide-solution").show();
-	})
+	});
 
 	jQuery(".hide-solution").click(function(){
 		var that = jQuery(this);
 		that.siblings(".solution-content").hide();
 		that.hide();
 		that.siblings(".show-solution").show();
-	})
-
-
+	});
+	
 	//show / hide solutions within the pre code element itself
 	jQuery(".code-and-solution").click(function(){
 		var that = jQuery(this);
