@@ -13,7 +13,7 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
-        <link href="css/font-awesome.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/font-awesome.min.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -35,31 +35,84 @@
 	<a href="index.html"><img border="0" alt="Courses" src="imgs/logo.png"></a>
 		<div class="reveal">
 			<div class="slides">
-				<section data-markdown>
-					## Introduction to programming using Python
-					### Session 2
-                    Matthieu Choplin
-                    <a href='mailto:matthieu.choplin1@city.ac.uk'>matthieu.choplin1@city.ac.uk</a>
-                    <a href='http://moodle.city.ac.uk/'>http://moodle.city.ac.uk/</a>
-				</section>
-				<section data-markdown>
-                    ### Objectives
-                    * Review what you have seen before regarding variables: exercises!
-                    * To get a brief overview of what Python is
-                    * To understand computer basics and programs
-                    * To understand what statement, variable and expressions are
-                    * To explain the differences between syntax errors, runtime errors, and logic errors.
+				<section>
+					<h2>Introduction to programming using Python</h2>
+					<h3>Session 2</h3>
+                    <p>Matthieu Choplin</p>
+                    <p><a href='mailto:matthieu.choplin1@city.ac.uk'>matthieu.choplin1@city.ac.uk</a></p>
+                    <p><a href='http://moodle.city.ac.uk/'>http://moodle.city.ac.uk/</a></p>
 				</section>
 				<section>
-                    <h3>Exercise 1</h3>
-                    <p>
-                        <ul>
-                            <li>Translate the following algorithm into Python code:</li>
-                                <li>Step 1: Use a variable named miles with initial value 100 .</li>
-                                <li>Step 2: Multiply miles by 1.609 and assign it to a variable named kilometers</li>
-                                <li>Step 3: Display the value of kilometers</li>
-                        </ul>
-                    </p>
+                    <h3>Objectives</h3>
+					<ul>
+                    	<li>Review what we have seen in the previous session:</li>
+						<ul>
+							<li>Variables</li>
+							<li>Data types</li>
+							<li>Built in functions</li>
+						</ul>
+						<li>How to define our own functions</li>
+					</ul>
+				</section>
+				<section>
+                    <h3>Variables 1</h3>
+					<ul>
+                    	<li>Python has strong dynamic typing</li>
+						<ul>
+							<li>No need to declare the type of the variable</li>
+							<li>Python recognises the type according to the value of the variable</li>
+						</ul>
+						<pre class="solution-content python"><code data-trim data-noescape>
+							my_variable = 100
+print(type(my_variable))  # will print &lt;class 'int'&gt;
+my_variable="100"  # notice the quote for a string data type
+print(type(my_variable))  # will print &lt;class 'str'&gt;
+						</code></pre>
+					</ul>
+				</section>
+				<section>
+                    <h3>Variables 2</h3>
+					<ul>
+						<li>Python is case sensitive</li>
+						<pre class="solution-content python"><code data-trim data-noescape>
+							My_variable = 100
+print(id(My_variable))
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+NameError: name 'my_variable' is not defined
+						</code></pre>
+					</ul>
+				</section>
+				<section>
+                    <h3>Variables 3</h3>
+					<ul>
+						<li>A variable has an address in memory</li>
+						<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=my_variable+%3D+%22a+value%22%0Aprint(%22the+address+in+memory+is%22,+id(my_variable%29%29%0Amy_variable+%3D+%22an+other+value%22%0Aprint(%22the+address+in+memory+is%22,+id(my_variable%29%29%0Aan_other_variable+%3D+%22an+other+value%22&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=3&rawInputLstJSON=%5B%5D&curInstr=0&codeDivWidth=500&codeDivHeight=400"> </iframe>
+					</ul>
+				</section>
+				<section>
+                    <h3 style="margin-bottom: 0px;">Variables 4</h3>
+					<ul>
+						<li>A variable has a <strong>scope</strong>: only accessible from where it is defined.</li>
+						<li>A variable is wiped out from memory once it stopped being used. We say that is it <strong>garbage collected</strong></li>
+					</ul>
+					<p>We define <em>variable_a</em> in <em>program_a.py</em></p>
+					<pre><code>#program_a.py
+variable_a = 42</code></pre>
+					<p>We try to use <em>variable_a</em> in <em>program_b.py</em>. What is wrong?
+					<pre><code>#program_b.py
+print(variable_a)</code></pre>
+				</section>
+				<section>
+                    <h3>Exercise 1: From algorithm to Python code</h3>
+					<ul>
+						<li>Translate the following algorithm into Python code:</li>
+							<ul>
+								<li>Step 1: Use a variable named <em>miles</em> with initial value 100 .</li>
+								<li>Step 2: Multiply <em>miles</em> by 1.609 and assign it to a variable named kilometers</li>
+								<li>Step 3: Display the value of kilometers</li>
+							</ul>
+					</ul>
 					<div class="solution">
 						<p class="show-solution"><i class="icon-eye-open"></i>Show solution</p>
 						<p class="hide-solution"><i class="icon-eye-close"></i>Hide solution</p>
@@ -67,6 +120,70 @@
 kilometers = miles * 1.609
 print(kilometers)</code></pre>
 					</div>
+				</section>
+				<section>
+                    <h3>Exercise 2.1: Area of a squared room</h3>
+					<ul>
+						<li>The <em>length</em> and <em>width</em> are hardcoded variables for now.</li>
+						<li>Use variables (for length, width and area)</li>
+						<li>The multiply operator in Python is the sign<strong>*</strong></li>
+						<li>Formulae of the area of a square: length * width</li>
+						<li>Use the <strong>print()</strong> function to display the result</li>
+					</ul>
+					<div class="solution">
+						<p class="show-solution"><i class="icon-eye-open"></i>Show solution</p>
+						<p class="hide-solution"><i class="icon-eye-close"></i>Hide solution</p>
+<pre class="solution-content python"><code>length = 3
+width = 4
+area = length * width  # we are using variables defined above
+print("The area of the squared room of length", \
+	length, "and width", width, "is", area)</code></pre>
+					</div>
+				</section>
+				<section>
+                    <h3 style="margin-bottom: 0px;">Exercise 2.2: Dynamic Area</h3>
+					<ul>
+						<li>The <em>length</em> and <em>width</em> are dynamic variables now.</li>
+						<li>Use the <strong>input()</strong> function for taking the values from the user.</li>
+						<li>Convert the input received into a number with the function <strong>float()</strong></li>
+					</ul>
+					<div class="solution">
+						<p class="show-solution"><i class="icon-eye-open"></i>Show solution</p>
+						<p class="hide-solution"><i class="icon-eye-close"></i>Hide solution</p>
+<pre class="solution-content python"><code>length = input("What is the length of the room? ")
+width = input("What is the width of the room? ")
+area = length * width  # using variables defined above
+print("The area of the squared room of length", \
+	length, "and width", width, "is", area)</code></pre>
+					</div>
+				</section>
+				<section>
+                    <h3>Data types</h3>
+					<ul>
+                    	<li>Integer</li>
+                    	<li>Float</li>
+						<li>String</li>
+					</ul>
+				</section>
+				<section>
+                    <h3>Built in functions</h3>
+					<ul>
+                    	<li>print()</li>
+						<li>input()</li>
+						<li>Conversion type:</li>
+						<ul>
+							<li>int()</li>
+							<li>float()</li>
+							<li>str()</li>
+						</ul>
+						<li>Introspection:</li>
+						<ul>
+							<li>type()</li>
+							<li>dir()</li>
+							<li>help()</li>
+							<li>id()</li>
+						</ul>
+					</ul>
 				</section>
 
 		<script src="lib/js/head.min.js"></script>
@@ -76,6 +193,8 @@ print(kilometers)</code></pre>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+				slideNumber: true,
+				center: false,
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
