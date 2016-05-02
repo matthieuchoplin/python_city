@@ -41,4 +41,16 @@
     line-height: 35px;
     width: auto;
 }
+/*
+Hide the code executed by SKULPT js
+*/
+.reveal textarea {
+    visibility: hidden
+}
 
+/* button used for executing python code */
+.btn-primary {
+    background-color: #428BCA;
+    border-color: #357EBD;
+    color: #FFFFFF;
+}

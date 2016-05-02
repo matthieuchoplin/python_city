@@ -23,16 +23,48 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-		<script>
-		$(document).ready(function(){
-			$("button").click(function(){
-				$("p").toggle();
-			});
-		});
-		</script>
 	</head>
 	<body>
+    <!-- for the log clickable to come back on the course home page -->
 	<a href="index.html"><img border="0" alt="Courses" src="imgs/logo.png"></a>
+    <!-- for executing the code with SKULPT -->
+    <script type="text/javascript">
+    // output functions are configurable.  This one just appends some text
+    // to a pre element.
+    function outf(text) {
+        var mypre = document.getElementById("output");
+        mypre.innerHTML = mypre.innerHTML + text;
+    }
+    function builtinRead(x) {
+        if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                throw "File not found: '" + x + "'";
+        return Sk.builtinFiles["files"][x];
+    }
+
+    // Here's everything you need to run a python program in skulpt
+    // grab the code from your textarea
+    // get a reference to your pre element for output
+    // configure the output function
+    // call Sk.importMainWithBody()
+    function runit() {
+       var prog = document.getElementById("yourcode").value;
+       var mypre = document.getElementById("output");
+       mypre.innerHTML = '';
+       Sk.pre = "output";
+       Sk.configure({output:outf, read:builtinRead});
+       (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
+       var myPromise = Sk.misceval.asyncToPromise(function() {
+           return Sk.importMainWithBody("<stdin>", false, prog, true);
+       });
+       myPromise.then(function(mod) {
+           console.log('success');
+       },
+           function(err) {
+           console.log(err.toString());
+       });
+    }
+    </script>
+        <!-- begining of the slides with reveal.js -->
 		<div class="reveal">
 			<div class="slides">
 				<section>
@@ -62,7 +94,7 @@
 							<li>Python recognises the type according to the value of the variable</li>
 						</ul>
 						<pre class="solution-content python"><code data-trim data-noescape>
-							my_variable = 100
+my_variable = 100
 print(type(my_variable))  # will print &lt;class 'int'&gt;
 my_variable="100"  # notice the quote for a string data type
 print(type(my_variable))  # will print &lt;class 'str'&gt;
@@ -74,7 +106,7 @@ print(type(my_variable))  # will print &lt;class 'str'&gt;
 					<ul>
 						<li>Python is case sensitive</li>
 						<pre class="solution-content python"><code data-trim data-noescape>
-							My_variable = 100
+My_variable = 100
 print(id(My_variable))
 Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
@@ -168,8 +200,8 @@ print(variable_a)</code></pre>
 							</ul>
 					</ul>
 					<div class="solution">
-						<p class="show-solution"><i class="icon-eye-open"></i>Show solution</p>
-						<p class="hide-solution"><i class="icon-eye-close"></i>Hide solution</p>
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
 <pre class="solution-content python"><code>miles = 100
 kilometers = miles * 1.609
 print(kilometers)</code></pre>
@@ -185,8 +217,8 @@ print(kilometers)</code></pre>
 						<li>Use the <strong>print()</strong> function to display the result</li>
 					</ul>
 					<div class="solution">
-						<p class="show-solution"><i class="icon-eye-open"></i>Show solution</p>
-						<p class="hide-solution"><i class="icon-eye-close"></i>Hide solution</p>
+						<p class="show-solution"><i class="icon-eye-open" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
 <pre class="solution-content python"><code>length = 3
 width = 4
 area = length * width  # we are using variables defined above
@@ -202,8 +234,8 @@ print("The area of the squared room of length", \
 						<li>Convert the input received into a number with the function <strong>float()</strong></li>
 					</ul>
 					<div class="solution">
-						<p class="show-solution"><i class="icon-eye-open"></i>Show solution</p>
-						<p class="hide-solution"><i class="icon-eye-close"></i>Hide solution</p>
+						<p class="show-solution"><i class="icon-eye-open" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
 <pre class="solution-content python"><code>length = input("What is the length of the room? ")
 width = input("What is the width of the room? ")
 area = length * width  # using variables defined above
@@ -325,8 +357,8 @@ print("The area of the squared room of length", \
 				<section>
                     <h3>Solution: Computing Loan Payments</h3>
 					<div class="solution">
-						<p class="show-solution"><i class="icon-eye-open"></i>Show solution</p>
-						<p class="hide-solution"><i class="icon-eye-close"></i>Hide solution</p>
+						<p class="show-solution"><i class="icon-eye-open" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
 <pre class="solution-content python" style="margin-bottom: 0px; font-size: 22px;"><code># Enter yearly interest rate
 annualInterestRate = eval(input(
   "Enter annual interest rate, e.g., 8.25: "))
@@ -352,7 +384,8 @@ print("The total payment is "+str(int(totalPayment *100) /100))</code></pre>
 					<pre class="solution-content python" ><code>first_string = "abra"
 second_string = "cada"
 third_string = "bra"
-concatenated_string = first_string + second_string + third_string
+concatenated_string = first_string + second_string \
+    + third_string
 print("first_string is", first_string,
     "second_string is", second_string,
     "third_string is ", third_string,
@@ -432,9 +465,18 @@ print("first_string is", first_string,
 					  </tr>
 					</table>
 				</section>
-				<section>
-                    <h3>Javascript slides: logical operations</h3>
-				</section>
+                <section>
+                    <h3>Try This</h3>
+                    <form>
+                        <textarea id="yourcode" cols="40" rows="10" invisible="1">import this</textarea><br />
+                        <button type="button" class="btn btn-primary large" onclick="runit()">Run</button>
+                    </form>
+                    <pre id="output" ></pre>
+                    <!-- If you want turtle graphics include a canvas -->
+                    <div id="mycanvas"></div>
+                </section>
+			</div>
+		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
@@ -454,6 +496,8 @@ print("first_string is", first_string,
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/menu/menu.js' },
 					{ src: 'plugin/jquery-2.0.0.min.js' },
+					{ src: 'plugin/skulpt.min.js' },
+					{ src: 'plugin/skulpt-stdlib.js' },
 					{ src: 'plugin/custom.js' },
 
 				]
