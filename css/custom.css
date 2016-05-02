@@ -1,3 +1,7 @@
+.reveal p{
+	text-align: left;
+}
+
 .reveal .solution .solution-content {
     display: none;
     line-height: 28px;
@@ -34,7 +38,6 @@
     font-family: "courier new", courier, monospace;
     font-size: 28px;
     margin-bottom: 30px;
-    font-size: 26px;
     line-height: 35px;
     width: auto;
 }
