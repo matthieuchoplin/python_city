@@ -126,7 +126,7 @@ NameError: name 'my_variable' is not defined
                     <h3 style="margin-bottom: 0px;">Variables 4: scope</h3>
 					<ul>
 						<li>A variable has a <strong>scope</strong>: only accessible from where it is defined.</li>
-						<li>A variable is wiped out from memory once it stopped being used. We say that is it <strong>garbage collected</strong></li>
+						<li>A variable is wiped out from memory once it stops being used. We say that is it <strong>garbage collected</strong></li>
 					</ul>
 					<p>We define <em>variable_a</em> in <em>program_a.py</em></p>
 					<pre><code>#program_a.py
@@ -197,7 +197,7 @@ print(variable_a)</code></pre>
 							<ul>
 								<li>Step 1: Use a variable named <em>miles</em> with initial value 100 .</li>
 								<li>Step 2: Multiply <em>miles</em> by 1.609 and assign it to a variable named kilometers</li>
-								<li>Step 3: Display the value of kilometers</li>
+								<li>Step 3: Display the value of kilometers with the function print()</li>
 							</ul>
 					</ul>
 					<div class="solution">
@@ -338,7 +338,7 @@ print("The area of the squared room of length", \
 				</section>
 				<section>
                     <h3>The % (modulo or remainder) operator (2/2)</h3>
-					<p>Remainder is very useful in programming. For example, an even number % 2 is always 0 and an
+					<p><strong>Remainder or Modulo</strong> is very useful in programming. For example, an even number % 2 is always 0 and an
 						odd number % 2 is always 1. So you can use this property to determine whether a number is even or odd.</p>
 				</section>
 				<section>
@@ -588,6 +588,29 @@ else:
                     </ul>
                 </section>
                 <section>
+                    <h3>Exercise: password</h3>
+                    <p>Create a program that ask the user for a password.</p>
+                    <ul>
+                        <li>Have the password defined in "clear" in your program, in a variable called "PASSWORD"</li>
+                        <li>Use input() to receive the password entered by the user</li>
+                        <li>If the word entered by the user matches the password, display "Access Granted", else, "Forbidden"</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Solution: password</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<pre class="solution-content python"><code data-trim data-noescape>PASSWORD = 'super_password123'
+password_entered = input("Enter the password: ")
+if password_entered == PASSWORD:
+    print("Access Granted")
+else:
+    print("Forbidden")
+                    </code></pre>
+					</div>
+                </section>
+                <section>
                     <h3>Truth tables</h3>
                     <p>Show every possible result of a Boolean operator.</p>
                     <h4>The <strong>and</strong> Operator’s Truth Table</h4>
@@ -648,7 +671,33 @@ else:
                     <iframe src="https://trinket.io/embed/python3/fec9e65f1f?runMode=console" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
                 </section>
                 <section>
-                    <h3>Exercise: control flow</h3>
+                    <h3>Exercise: password and login</h3>
+                    <p>Create a program that ask the user for a login and password.</p>
+                    <ul>
+                        <li>Have the password "PASSWORD" AND login "LOGIN" defined in "clear" in your program, in variables</li>
+                        <li>Use input() to receive the password and login entered by the user</li>
+                        <li>If login and password match the values of your PASSWORD and LOGIN, display "Access Granted", else, "Forbidden"</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Solution: password and login</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<pre class="solution-content python"><code data-trim data-noescape>PASSWORD = 'super_password123'
+LOGIN = 'superadmin'
+login_entered = input("Enter the login: ")
+password_entered = input("Enter the password: ")
+if password_entered == PASSWORD \
+    AND login_entered == LOGIN:
+    print("Access Granted")
+else:
+    print("Forbidden")
+                    </code></pre>
+					</div>
+                </section>
+                <section>
+                    <h3>Exercise: check number divisor</h3>
                     <p>Write a program that prompts the user to enter an integer. If the number is a multiple of 5, print HiFive.
                         If the number is divisible by 2, print HiEven.</p>
                     <ul>
@@ -717,6 +766,31 @@ print('The grade is ', grade)
                 <section>
                     <h3>Solution: determining a leap year</h3>
 					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Complete solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<pre class="solution-content python"><code data-trim data-noescape style="margin-bottom: 0px; font-size: 16px;">
+year = input("Enter a year : ")
+year = int(year)
+leap_year = False # boolean value saying if
+                  # the year is a leap_year or not
+if year % 400 == 0:
+    leap_year = True
+elif year % 100 == 0:
+    leap_year = False
+elif year % 4 == 0:
+    leap_year = True
+else:
+    leap_year = False
+if leap_year:
+    print("The year entered is a leap year.")
+else:
+    print("The year entered is not a leap year.")
+</code></pre>
+					</div>
+                </section>
+                <section>
+                    <h3>Solution optimized: determining a leap year</h3>
+					<div class="solution">
 						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Condition to use</p>
 						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide hint</p>
 <pre class="solution-content python"><code data-trim data-noescape>(year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)</code></pre>
@@ -739,12 +813,74 @@ else:
                         each year being represented by an animal: rat, ox, tiger, rabbit, dragon,
                         snake, horse, sheep, monkey, rooster, dog, and pig, in this cycle</p>
 					<div class="solution">
-						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Hint</p>
-						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide hint</p>
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Hint 1</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide hint 1</p>
                         <p class="solution-content python">Use the modulo (%).</p>
 					</div>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Hint 2</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide hint 2</p>
+                        <p class="solution-content python">2016 is the year of the monkey and 2016 % 12 equals 0</p>
+					</div>
                 </section>
+                <section>
+                    <h3>Exercise: Chinese Zodiac sign</h3>
 
+                    <table style="margin-bottom: 0px; font-size: 22px;">
+                        <tr>
+                            <th>Year</th>
+                            <th>Zodiac sign</th>
+                        </tr>
+                        <tr>
+                            <th>0</th>
+                            <th>monkey</th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>rooster</th>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <th>dog</th>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <th>pig</th>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <th>rat</th>
+                        </tr>
+                        <tr>
+                            <th>5</th>
+                            <th>ox</th>
+                        </tr>
+                        <tr>
+                            <th>6</th>
+                            <th>tiger</th>
+                        </tr>
+                        <tr>
+                            <th>7</th>
+                            <th>rabbit</th>
+                        </tr>
+                        <tr>
+                            <th>8</th>
+                            <th>dragon</th>
+                        </tr>
+                        <tr>
+                            <th>9</th>
+                            <th>snake</th>
+                        </tr>
+                        <tr>
+                            <th>10</th>
+                            <th>horse</th>
+                        </tr>
+                        <tr>
+                            <th>11</th>
+                            <th>sheep</th>
+                        </tr>
+                    </table>
+                </section>
                 <!-- EXPERIMENT WITH SKULPT
                 <section>
                     <h3>Try This</h3>
