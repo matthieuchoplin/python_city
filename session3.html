@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Session 1</title>
+		<title>Session 3</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
@@ -37,7 +37,7 @@
 			<div class="slides">
 				<section>
 					<h2>Introduction to programming using Python</h2>
-					<h3>Session 2</h3>
+					<h3>Session 3</h3>
                     <p>Matthieu Choplin</p>
                     <p><a href='mailto:matthieu.choplin1@city.ac.uk'>matthieu.choplin1@city.ac.uk</a></p>
                     <p><a href='http://moodle.city.ac.uk/'>http://moodle.city.ac.uk/</a></p>
@@ -45,29 +45,278 @@
 				<section>
                     <h3>Objectives</h3>
 					<ul>
-                        <li>Calling built in functions</li>
-						<li>How to define our own functions</li>
+                        <li>Looping with while</li>
+                        <li>Looping with for</li>
 					</ul>
 				</section>
 				<section>
-                    <h3>Built in functions</h3>
+                    <h3>Motivation</h3>
+					<p>On one of our previous program, we asked the user to enter a password.</p>
 					<ul>
-                    	<li>print()</li>
-						<li>input()</li>
-						<li>Conversion type:</li>
-						<ul>
-							<li>int()</li>
-							<li>float()</li>
-							<li>str()</li>
-						</ul>
-						<li>Introspection:</li>
-						<ul>
-							<li>type()</li>
-							<li>dir()</li>
-							<li>help()</li>
-							<li>id()</li>
-						</ul>
+						<li>If the password was correct, we printed "Access Granted"</li>
+						<li>Else, we printed, "Forbidden"</li>
 					</ul>
+					<div ><pre style="margin-bottom: 0px; font-size: 22px;"><code>PASSWORD = 'super_password123'
+password_entered = input("Enter the password: ")
+if password_entered == PASSWORD:
+    print("Access Granted")
+else:
+    print("Forbidden")</code></pre></div>
+				</section>
+				<section>
+                    <h3>Motivation</h3>
+					<p>However, the user only had <em>one chance</em> to enter a correct password.
+						If the password was incorrect or correct, the program would stopped.</p>
+					<p>What if we want to make the user able to try more than once to enter a correct password?</p>
+				</section>
+				<section>
+                    <h3>Structure of the while loop</h3>
+					<div ><pre ><code>while condition:
+    # statement</code></pre></div>
+					<p>Where:</p>
+					<ul>
+						<li>The <strong>condition</strong> is an expression that take the value True or False (boolean)</li>
+						<li>The <strong>statement</strong> does something, mind the <strong>indentation</strong></li>
+						<li><strong>While</strong> the condition is True, the <strong>statement</strong> or <strong>body</strong> of the <strong>loop</strong> is executed</li>
+						<li>Each time that the body of the loop is executed is an <strong>iteration</strong></li>
+					</ul>
+				</section>
+				<section>
+                    <h3 style="margin-bottom: 0px;">Structure of the while loop, flow chart</h3>
+					<img data-src="imgs/flow_chart_loop.png" style="background:none; border:none; box-shadow:none;">
+				</section>
+				<section>
+                    <h3>The while loop applied to our problem</h3>
+					<div ><pre ><code>PASSWORD = 'super_password123'
+password_entered = ''
+while password_entered!=PASSWORD:
+    password_entered = input("Enter the password: ")
+    if password_entered == PASSWORD:
+        print("Access Granted")
+    else:
+        print("Forbidden")</code></pre></div>
+					<p>Where:</p>
+					<ul>
+						<li>The <strong>condition</strong> is the boolean value given by the comparison of the password_entered compared to PASSWORD</li>
+					</ul>
+				</section>
+				<section>
+                    <h3 style="margin-bottom: 0px;">Structure of the while loop, flow chart</h3>
+					<img data-src="imgs/flow_chart_loop_ex.png" style="background:none; border:none; box-shadow:none;">
+				</section>
+				<section>
+                    <h3>Reminder: using variable</h3>
+					<p>You cannot used a variable that has not been declared</p>
+					<div ><pre ><code>PASSWORD = 'super_password123'
+while password_entered!=PASSWORD:
+    password_entered = input("Enter the password: ")
+    if password_entered == PASSWORD:
+        print("Access Granted")
+    else:
+        print("Forbidden")</code></pre></div>
+					<p>Can you see why this is wrong? Try to run this program. See the error and explain what you need to correct.</p>
+				</section>
+				<section>
+                    <h3>Reminder: using variable</h3>
+					<p>You need to declare the variable <em>password_entered</em> before using it, else, you get:</p>
+					<pre>NameError: name 'password_entered' is not defined</pre>
+					<div ><pre ><code>PASSWORD = 'super_password123'
+password_entered = ''
+while password_entered!=PASSWORD:
+    password_entered = input("Enter the password: ")
+    if password_entered == PASSWORD:
+        print("Access Granted")
+    else:
+        print("Forbidden")</code></pre></div>
+				</section>
+				<section>
+                    <h3>Reminder: conditions</h3>
+					<p>Conditions are expressions, they return a value that can only be True or False.</p>
+					<p>A condition that is always True, if used in a while loop, produces an <strong>infinite loop.</strong></p>
+					<div ><pre style="margin-bottom: 0px; font-size: 22px;"><code>while True:
+    print('test infinite loop')</code></pre></div>
+					<table>
+						<tr>
+							<td style="width: 40%;text-align: justify; vertical-align: top;">NB: to stop the infinite loop in Pycharm, click on the little red square:</td>
+							<td style="width: 60%; border-image-width: 0px;"><img data-src="imgs/stop_program.png" style="background:none; border:none; box-shadow:none;"></td>
+						</tr>
+					</table>
+				</section>
+				<section>
+                    <h3>How to avoid infinite loop</h3>
+					<p>Make sure that the condition gets False at some point during the execution of the program</p>
+					<p>You can implement a counter, to limit the number of <strong>iterations</strong>:</p>
+					<div ><pre style="margin-bottom: 0px; font-size: 22px;"><code>counter=0
+while counter < 5:
+    counter = counter + 1 # that you can also write counter+=1
+    print('test infinite loop')</code></pre></div>
+					<p style="margin-bottom: 0px; font-size: 28px;">NB: <code>counter = counter + 1</code> is equivalent to <code>counter += 1</code></p>
+					<p>We say that we <strong>increment</strong> the counter at each <strong>iteration</strong></p>
+				</section>
+				<section>
+                    <h3>Exercise: Guess Number</h3>
+					<p>Make a program to ask the user to guess a the number that has been randomly generated.</p>
+					<p>Start from this file: <a href="exercises/GuessNumber.py">GuessNumber.py</a> (right click and save as)</p>
+					<ul>
+						<li>The user will be able to try continuously until he finds the correct number.</li>
+						<li>The program will stop as soon as the number is found, i.e. as soon as the random number matches the entered number</li>
+						<li>At each iteration, i.e. each time the user try a number and press enter, the program will say if the number is too high, too low or correct</li>
+					</ul>
+				</section>
+				<section>
+                    <h3>Solution: Guess Number</h3>
+					<div ><pre style="margin-bottom: 0px; font-size: 22px;"><code>import random
+
+# Generate a random number to be guessed
+number = random.randint(1, 100)
+print("Guess a magic number between 0 and 100")
+guess = -1
+while guess != number:
+    guess = int(input("Enter your guess: "))
+    if guess == number:
+        print("Yes, the number is", number)
+    elif guess > number:
+        print("Your guess is too high")
+    else:
+        print("Your guess is too low")
+</code></pre></div>
+				</section>
+				<section>
+                    <h3>The keyword break</h3>
+					<p>Instead of a condition, you can also use the keyword <strong>break</strong> to end the iteration of a loop.</p>
+					<iframe src="https://trinket.io/embed/python3/704e3a69e0" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+                    <h3>The keyword continue</h3>
+					<p>You can use the keyword <strong>continue</strong> to ignore the remaining code in the iteration and jump to the next iteration</p>
+					<iframe src="https://trinket.io/embed/python3/877b4a74e6" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+                    <h3>Combining break and continue</h3>
+					<p>You can use the keyword <strong>continue</strong> to ignore the remaining code in the iteration and jump to the next iteration</p>
+					<iframe src="https://trinket.io/embed/python3/266671ebc7" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+                    <h3>Exercise: quit the program with <strong>Q</strong></h3>
+					<p>Enable the use to enter some text and only quit the program if he clicks on "q" or "Q"</p>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<pre class="solution-content python"><code data-trim data-noescape>while True:
+    my_input = input('Type "q" or "Q" to quit: ')
+    if my_input.upper() == "Q":
+        break</code></pre>
+					</div>
+				</section>
+				<section>
+                    <h3>Exercise: compute average</h3>
+					<p style="margin-bottom: 0px; font-size: 20px;">Count positive and negative numbers and compute the average of numbers</p>
+					<p style="margin-bottom: 0px; font-size: 18px;">Write a program that reads an unspecified number of integers, determines how many positive
+and negative values have been read, and computes the total and average of the input values
+(not counting zeros). Your program ends with the input 0. Display the average as a floating point
+number. Here is a sample run:</p>
+					<pre style="margin-bottom: 0px; font-size: 18px;">Enter an integer, the input ends if it is 0: 1
+Enter an integer, the input ends if it is 0: 2
+Enter an integer, the input ends if it is 0: -1
+Enter an integer, the input ends if it is 0: 3
+Enter an integer, the input ends if it is 0: 0
+The number of positives is 3
+The number of negatives is 1
+The total is 5
+The average is 1.25
+Enter an integer, the input ends if it is 0: 0
+You didn't enter any number</pre>
+				</section>
+				<section>
+                    <h3>Solution: compute average</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<p class="solution-content python">Download solution here:<a href="exercises/count_positive_negative_num.py">count_positive_negative_num.py</a> (right click and save as)</p>
+					</div>
+				</section>
+				<section>
+                    <h3>Structure of the for loop</h3>
+					<div ><pre class="solution-content python"><code>for element in sequence:
+    # statement</code></pre></div>
+					<p>Where:</p>
+					<ul>
+						<li><strong>element</strong> is a variable that is going to take the value of each element of the sequence</li>
+					</ul>
+				</section>
+				<section>
+                    <h3>Example: a string is a sequence</h3>
+					<p>A string is a sequence of characters on which we can iterate.</p>
+					<p>The value of <strong>element</strong> is going to be the value of each character of the string (each letter of the word) successively</p>
+					<iframe src="https://trinket.io/embed/python3/1548e510ff" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+                    <h3>The function range</h3>
+					<p>You can create a sequence of number with the function <strong>range()</strong></p>
+					<div ><pre class="solution-content python"><code>for element in range(initialValue, endValue, step):
+    # statement</code></pre></div>
+					<p>Where:</p>
+					<ul>
+						<li><strong>initialValue</strong> and step value are optional arguments</li>
+						<li>The default initialValue is 0 and the <strong>endValue</strong> is excluded</li>
+						<li><strong>step</strong> represents the increment and can be positive or negatove</li>
+					</ul>
+				</section>
+				<section>
+                    <h3>Example: range(initialValue, endValue)</h3>
+					<p>Notice how the endValue is excluded</p>
+					<iframe src="https://trinket.io/embed/python3/8c9818da3a" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+                    <h3>Example: range(initialValue, endValue, step)</h3>
+					<p>Step specifies the increment</p>
+					<iframe src="https://trinket.io/embed/python3/3e819818a0" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+                    <h3>Exercise: conversion from miles to kilometer</h3>
+					<p>Write a program that displays the following table (note that 1 mile is 1.609 kilometres):</p>
+					<pre>Miles Kilometres
+1 1.609
+2 3.218
+...
+9 15.481
+10 16.090</pre>
+				</section>
+				<section>
+                    <h3>Solution: conversion from miles to kilometer</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<pre class="solution-content python"><code data-trim data-noescape>print("Miles"+ "   " + "Kilometers")
+miles = 1
+while miles <= 10:
+    print(str(miles) + "   "+  str(miles * 1.609))
+    miles += 1
+</code></pre>
+					</div>
+				</section>
+				<section>
+                    <h3>Exercise: Display leap years</h3>
+					<p>Write a program that displays, ten per line, all the leap years in the twenty-first century
+(from year 2001 to 2100). The years are separated by exactly one space.</p>
+				</section>
+				<section>
+                    <h3>Solution: Display leap years</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<pre class="solution-content python"><code data-trim data-noescape>count = 1
+for year in range(2001, 2100 + 1):
+    if year % 400 == 0 or \
+	(year % 4 == 0 and year % 100 != 0):
+        if count % 10 == 0:
+            print(year)
+        else:
+            print(year, end = " ")
+
+        count += 1
+</code></pre>
+					</div>
 				</section>
 			</div>
 		</div>
