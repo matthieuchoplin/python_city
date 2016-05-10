@@ -51,7 +51,7 @@
 				</section>
 				<section>
                     <h3>Motivation</h3>
-					<p>On one of our previous program, we asked the user to enter a password.</p>
+					<p>On one of our previous programs, we asked the user to enter a password.</p>
 					<ul>
 						<li>If the password was correct, we printed "Access Granted"</li>
 						<li>Else, we printed, "Forbidden"</li>
@@ -66,7 +66,7 @@ else:
 				<section>
                     <h3>Motivation</h3>
 					<p>However, the user only had <em>one chance</em> to enter a correct password.
-						If the password was incorrect or correct, the program would stopped.</p>
+						If the password was incorrect or correct, the program would stop.</p>
 					<p>What if we want to make the user able to try more than once to enter a correct password?</p>
 				</section>
 				<section>
@@ -75,7 +75,7 @@ else:
     # statement</code></pre></div>
 					<p>Where:</p>
 					<ul>
-						<li>The <strong>condition</strong> is an expression that take the value True or False (boolean)</li>
+						<li>The <strong>condition</strong> is an expression that takes the value True or False (boolean)</li>
 						<li>The <strong>statement</strong> does something, mind the <strong>indentation</strong></li>
 						<li><strong>While</strong> the condition is True, the <strong>statement</strong> or <strong>body</strong> of the <strong>loop</strong> is executed</li>
 						<li>Each time that the body of the loop is executed is an <strong>iteration</strong></li>
@@ -106,7 +106,7 @@ while password_entered!=PASSWORD:
 				</section>
 				<section>
                     <h3>Reminder: using variable</h3>
-					<p>You cannot used a variable that has not been declared</p>
+					<p>You cannot use a variable that has not been declared</p>
 					<div ><pre ><code>PASSWORD = 'super_password123'
 while password_entered!=PASSWORD:
     password_entered = input("Enter the password: ")
@@ -155,12 +155,12 @@ while counter < 5:
 				</section>
 				<section>
                     <h3>Exercise: Guess Number</h3>
-					<p>Make a program to ask the user to guess a the number that has been randomly generated.</p>
+					<p>Make a program to ask the user to guess the number that has been randomly generated.</p>
 					<p>Start from this file: <a href="exercises/GuessNumber.py">GuessNumber.py</a> (right click and save as)</p>
 					<ul>
 						<li>The user will be able to try continuously until he finds the correct number.</li>
 						<li>The program will stop as soon as the number is found, i.e. as soon as the random number matches the entered number</li>
-						<li>At each iteration, i.e. each time the user try a number and press enter, the program will say if the number is too high, too low or correct</li>
+						<li>At each iteration, i.e. each time the user tries a number and presses enter, the program will say if the number is too high, too low or correct</li>
 					</ul>
 				</section>
 				<section>
@@ -215,7 +215,7 @@ while guess != number:
 				<section>
                     <h3>Sentinel value</h3>
 					<p>This is what you have just used in the previous exercise.</p>
-					<p>A sentinel value is a value entered by the user (with input) that will make the program stopped. You can put a sentinel value in your loop to decide when you want to <strong>break</strong> it, to stop it.</p>
+					<p>A sentinel value is a value entered by the user (with input) that will make the program stop. You can put a sentinel value in your loop to decide when you want to <strong>break</strong> it, to stop it.</p>
 				</section>
 				<section>
                     <h3>Exercise: compute average</h3>
@@ -253,7 +253,7 @@ You didn't enter any number</pre>
 						<li><strong>element</strong> is a variable that is going to take the value of each element of the sequence</li>
 						<li><strong>element</strong> is NOT a keyword, it is a variable name, so you can give it whatever name you want</li>
 						<li>the keywords are <strong>for</strong> and <strong>in</strong></li>
-						<li>notice the indentation that indicate the <strong>body</strong> of the loop (same as for <strong>while</strong>)</li>
+						<li>notice the indentation that indicates the <strong>body</strong> of the loop (same as for <strong>while</strong>)</li>
 					</ul>
 				</section>
 				<section>
@@ -264,14 +264,14 @@ You didn't enter any number</pre>
 				</section>
 				<section>
                     <h3>The function range</h3>
-					<p>You can create a sequence of number with the function <strong>range()</strong></p>
+					<p>You can create a sequence of numbers with the function <strong>range()</strong></p>
 					<div ><pre class="solution-content python"><code>for element in range(initialValue, endValue, step):
     # statement</code></pre></div>
 					<p>Where:</p>
 					<ul>
 						<li><strong>initialValue</strong> and step value are optional arguments</li>
-						<li>The default initialValue is 0 and the <strong>endValue</strong> is excluded</li>
-						<li><strong>step</strong> represents the increment and can be positive or negatove</li>
+						<li>The default initialValue is 0 and the <strong>endValue</strong> is excluded from the interval</li>
+						<li><strong>step</strong> represents the increment and can be positive or negative</li>
 					</ul>
 				</section>
 				<section>
@@ -285,7 +285,7 @@ You didn't enter any number</pre>
 					<iframe src="https://trinket.io/embed/python3/3e819818a0" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 				</section>
 				<section>
-                    <h3>Exercise: conversion from miles to kilometer</h3>
+                    <h3>Exercise: conversion from miles to kilometers</h3>
 					<p>Write a program that displays the following table (note that 1 mile is 1.609 kilometres):</p>
 					<pre>Miles Kilometres
 1 1.609
@@ -295,7 +295,7 @@ You didn't enter any number</pre>
 10 16.090</pre>
 				</section>
 				<section>
-                    <h3>Solution: conversion from miles to kilometer</h3>
+                    <h3>Solution: conversion from miles to kilometers</h3>
 					<div class="solution">
 						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
 						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
@@ -331,20 +331,20 @@ for year in range(2001, 2100 + 1):
 					</div>
 				</section>
 				<section>
-					<h3>Sequence: check point</h3>
+					<h3>Sequences: check point</h3>
 					<ul>
-						<li>Sequence are objects on which we can <strong>iterate</strong> (by using a while or a for loop)</li>
+						<li>Sequences are objects on which we can <strong>iterate</strong> (by using a while or a for loop)</li>
 						<li>For each element you have one iteration</li>
-						<li>At this point we have seen two types of sequence:</li>
+						<li>At this point we have seen two types of sequences:</li>
 							<ul>
-								<li>string: sequence of characters (letters)</li>
-								<li>range object: sequence of integer (numbers)</li>
+								<li>string: sequences of characters (letters)</li>
+								<li>range object: sequences of integer (numbers)</li>
 							</ul>
-						<li>NB: sequence are containers, they contain objects</li>
+						<li>NB: sequences are containers, they contain objects</li>
 					</ul>
 				</section>
 				<section>
-					<h3>Sequence: what is next?</h3>
+					<h3>Sequences: what is next?</h3>
 					<ul>
 						<li>You will find and use sequences a lot in python</li>
 						<li>We will see other built in python sequences</li>
