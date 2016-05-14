@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Session 4</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+		<!-- Custom css -->
+        <link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<script>
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("p").toggle();
+			});
+		});
+		</script>
+		<script language="JavaScript" type="text/javascript">
+		  function step(id) {
+			var pjs = Processing.getInstanceById(id);
+			var key = document.getElementById('key').value.trim();
+
+			var index = pjs.step(key);
+			if (index == -2) {
+			  alert("Key " + pjs.getKey() + " is not in the list\nClick Reset to start over" );
+			}
+			else if (index >= 0) {
+			  alert("Key " + pjs.getKey() + " is at index " + index + "\nClick Reset to start over");
+			};
+		  }
+
+		  function reset(id) {
+			var pjs = Processing.getInstanceById(id);
+			var key = document.getElementById('key').value.trim();
+			pjs.reset();
+			pjs.draw();
+		  }
+		</script>
+	</head>
+	<body>
+	<a href="index.html"><img border="0" alt="Courses" src="imgs/logo.png"></a>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Introduction to programming using Python</h2>
+					<h3>Session 4</h3>
+                    <p>Matthieu Choplin</p>
+                    <p><a href='mailto:matthieu.choplin1@city.ac.uk'>matthieu.choplin1@city.ac.uk</a></p>
+                    <p><a href='http://moodle.city.ac.uk/'>http://moodle.city.ac.uk/</a></p>
+				</section>
+				<section>
+                    <h3>Linear Search</h3>
+    <canvas id="LinearSearch" data-processing-sources="pde/LinearSearch.pde" style="border-style:solid"></canvas>
+    <p style="text-align: center">Key: <input type="text" value="8" id="key" style="text-align: right"/>
+    <button type="button" class="button" onclick="step('LinearSearch')">Step</button>
+    <button type="button" class="button" onclick="reset('LinearSearch')">Reset</button></p>
+
+				</section>
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="js/processing-1.4.1.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				slideNumber: true,
+				center: false,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/menu/menu.js' },
+					{ src: 'plugin/jquery-2.0.0.min.js' },
+					{ src: 'plugin/custom.js' },
+
+				]
+			});
+		</script>
+	</body>
+</html>

@@ -54,3 +54,13 @@ Hide the code executed by SKULPT js
     border-color: #357EBD;
     color: #FFFFFF;
 }
+
+.button {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    display: inline;
+    color: #fff;
+    font-size: 14px;
+    background: #6193CB;
+    border: none;
+}
