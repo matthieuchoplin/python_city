@@ -64,3 +64,7 @@ Hide the code executed by SKULPT js
     background: #6193CB;
     border: none;
 }
+
+.reveal .usage {
+    font-size: 28px;
+}

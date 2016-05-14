@@ -23,13 +23,6 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-		<script>
-		$(document).ready(function(){
-			$("button").click(function(){
-				$("p").toggle();
-			});
-		});
-		</script>
 		<script language="JavaScript" type="text/javascript">
 		  function step(id) {
 			var pjs = Processing.getInstanceById(id);
@@ -73,7 +66,7 @@
 				</section>
 				<section>
 					<h3>Linear Search</h3>
-					<p>Usage: Enter a key as a number. Click the Step button to perform one comparison. Click the Reset button to start over with a new random list of integers. You may enter a new key for a new search.</p>
+					<p class="usage">Usage: Enter a key as a number. Click the Step button to perform one comparison. Click the Reset button to start over with a new random list of integers. You may enter a new key for a new search.</p>
 					<iframe width="100%" height="500" frameborder="0" src="embedded/linear_search.html"
         sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
 				</section>
@@ -87,10 +80,26 @@
 				</section>
 				<section>
 					<h3>Binary Search</h3>
-					<p>Usage: Enter a key as a number. Click the Step button to perform one comparison. Click the Reset button to start over with a new random list of integers. You may enter a new key for a new search.</p>
+					<p class = "usage">Usage: Enter a key as a number. Click the Step button to perform one comparison. Click the Reset button to start over with a new random list of integers. You may enter a new key for a new search.</p>
 					<iframe width="800" height="500" frameborder="0" src="embedded/binary_search.html"
         sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
 				</section>
+				<section>
+					<h3>Selection Sort</h3>
+					<p class = "usage">Usage: Perform selection sort for a list of integers. Click the Step button to find the smallest element (highlighted in red) and swap this element with the first element (highlighted in orange) in the the unsorted sublist. The elements that are already sorted are highlighted in green.
+      Click the Reset button to start over with a new random list.</p>
+					<iframe width="800" height="500" frameborder="0" src="embedded/selection_sort.html"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+				</section>
+				<section>
+					<h3>Insertion Sort</h3>
+					<p class = "usage">Usage: Perform insertion sort for a list of integers.
+      click the Step button to insert the current element to a sorted sublist.
+      Click the Reset button to start over with a new random list.</p>
+					<iframe width="800" height="500" frameborder="0" src="embedded/insertion_sort.html"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+				</section>
+
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
