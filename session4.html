@@ -59,8 +59,8 @@
 				<section>
 					<h3>Objectives</h3>
 					<ul style="font-size: 26px;">
-						<li>To describe why lists are useful in programming.</li>
-						<li>To create lists.</li>
+						<li>To come back on the notion of object and type.</li>
+						<li>To introduce to the type "List".</li>
 						<li>To invoke list’s append, insert, extend, remove, pop, index, count, sort, reverse methods.</li>
 						<li>To use the len, min/max, sum, and random.shuffle functions for a list.</li>
 						<li>To access list elements using indexed variables.</li>
@@ -77,12 +77,284 @@
 					</ul>
 				</section>
 				<section>
+					<h3>What is the difference between an object and a type?</h3>
+					<p>A <strong>type</strong> or a <strong>class</strong> is what is going to create an object</p>
+					<p>Type and object seen so far:</p>
+					<table>
+						<th>
+							Types
+						</th>
+						<th>
+							Objects
+						</th>
+						<th>
+							Constructor
+						</th>
+						<tr>
+							<td>Integer</td>
+							<td>1, 3, 4, 5, 999, -3, -4</td>
+							<td>int()</td>
+						</tr>
+						<tr>
+							<td>Float</td>
+							<td>1.333, -0.5, 0.001</td>
+							<td>float()</td>
+						</tr>
+						<tr>
+							<td>String</td>
+							<td>"Foo", 'bar', ""</td>
+							<td>str()</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>An object has methods</h3>
+					<p>You can find the method of an object with the function <strong>dir()</strong>, which returns the attributes of an object.</p>
+					<div ><pre ><code>>>> dir("abc")
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']</code></pre></div>
+					<p>NB: the dunder methods (with double underscore), are "special methods" in python that can be overridden. We will come back on that later.</p>
+				</section>
+				<section>
+					<h3>Difference between methods of objects and <a href="https://docs.python.org/3.5/library/functions.html">builtin functions</a></h3>
+					<p>The methods of an object can <strong>only be called on an object</strong>.</p>
+					<div><pre class="solution-content python"><code>>>> "speak louder".upper()
+'SPEAK LOUDER'</code></pre></div>
+					<p>A <strong>builtin function</strong> does not need an object to be called.</p>
+					<div><pre class="solution-content python"><code>>>> len("number of character")
+19</code></pre></div>
+					<p>NB: <strong>len()</strong> give the number of element in a sequence</p>
+				</section>
+				<section>
+					<h3>The type List</h3>
+					<p>Creating list using the list constructor</p>
+					<div><pre class="solution-content python"><code>list1 = list() # Create an empty list
+list2 = list([2, 3, 4]) # Create a list with elements 2, 3, 4
+list3 = list(["red", "green", "blue"]) # Create a list of strings
+list4 = list(range(3, 6)) # Create a list with elements 3, 4, 5
+list5 = list("abcd") # Create a list with characters a, b, c</code></pre></div>
+					<p>That is the equivalent of:</p>
+					<div><pre class="solution-content python"><code>list1 = [] # Same as list()
+list2 = [2, 3, 4] # Same as list([2, 3, 4])
+list3 = ["red", "green"] # Same as list(["red", "green"])</code></pre></div>
+				</section>
+				<section>
+					<h3>The List methods</h3>
+					<p>You can find the different methods of a list thanks to the function <strong>dir()</strong></p>
+					<div><pre class="solution-content python"><code>>>> dir([])
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']</code></pre></div>
+					<p>We are going to look at: 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort'</p>
+				</section>
+				<section>
+					<h3>How to see what a method can do</h3>
+					<p>Look at the builtin help:</p>
+					<div><pre class="solution-content python"><code>>>> help([].append)
+Help on built-in function append:
+
+append(...) method of builtins.list instance
+    L.append(object) -> None -- append object to end</code></pre></div>
+				<p>Experiment in the interpreter:</p>
+				<iframe src="https://trinket.io/embed/python3/1c67a8cf6a" width="100%" height="150" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+					<h3>Summary of the list methods</h3>
+					<table style="font-size: 24px">
+						<tr>
+							<td style="width: 30%;"><strong>append</strong>(x: object): None</td>
+							<td>Add an item x to the end of the list.</td>
+						</tr>
+						<tr>
+							<td><strong>insert</strong>(index: int, x: object): None</td>
+							<td>Insert an item x at a given index. Note that the first element in the list has index 0.</td>
+						</tr>
+						<tr>
+							<td><strong>remove</strong>(x: object): None</td>
+							<td>Remove the first occurrence of the item x from the list.</td>
+						</tr>
+						<tr>
+							<td><strong>index</strong>(x: object): int</td>
+							<td>Return the index of the item x in the list.</td>
+						</tr>
+						<tr>
+							<td><strong>count</strong>(x: object): int</td>
+							<td>Return the number of times item x appears in the list.</td>
+						</tr>
+						<tr>
+							<td><strong>sort</strong>(): None</td>
+							<td>Sort the items in the list.</td>
+						</tr>
+						<tr>
+							<td><strong>reverse</strong>(): None</td>
+							<td>Reverse the items in the list.</td>
+						</tr>
+						<tr>
+							<td><strong>extend</strong>(L: list): None</td>
+							<td>Append all the items in list L to the list.</td>
+						</tr>
+						<tr>
+							<td><strong>pop</strong>([i]): object</td>
+							<td>Remove the item at the given position and return it. The square bracket denotes that parameter is optional. If no index is specified, list.pop() removes and returns the last item in the list.</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Exercise</h3>
+					<p style="font-size: 26px">Write a program that reads integers from the user and stores them in a list (use input() and append()). Your program should continue reading values until the user enters 'q' (the sentinel value).
+						Then it should display all of the values entered by the user in order from smallest to largest, with one value appearing on each line. Use either the sort method or the sorted
+built in function to sort the list.</p>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">data = []
+num = input("Enter an integer ('q' to quit): ")
+while num != 'q':
+    data.append(int(num))
+    num = input("Enter an integer ('q' to quit): ")
+data.sort()
+print("The values, sorted into ascending order are:")
+for element in data:
+    print(element)</code></pre></div>
+				</section>
+				<section>
+					<h3>Builtin function for list or sequences</h3>
+					<div><pre class="solution-content python"><code>>>> list1 = [2, 3, 4, 1, 32]
+>>> len(list1)
+5
+>>> max(list1)
+32
+>>> min(list1)
+1
+>>> sum(list1)
+42
+>>> import random
+>>> random.shuffle(list1) # Shuffle the items in the list
+>>> list1
+[4, 1, 2, 32, 3]</code></pre></div>
+				</section>
+				<section>
+					<h3>Iterating on a list</h3>
+					<p>The list is a <strong>sequence</strong> on which you can iterate.</p>
+					<p>With <strong>for</strong>:</p>
+					<iframe src="https://trinket.io/embed/python3/1461d22c84" width="100%" height="120" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+					<p>With <strong>while</strong>:</p>
+					<iframe src="https://trinket.io/embed/python3/9f18c32565" width="100%" height="160" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+					<h3>Reminder about functions</h3>
+					<p>We define the function like this:</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;">def main():
+    print('The function', main.__name__, 'has been called')</code></pre>
+					<p>And we call the functions like this:</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;">main()</code></pre>
+					<p>NB: notice the brackets: when we define and when we call!</p>
+					<p>Try to use functions in the next exercises.</p>
+				</section>
+				<section>
+					<h3>Exercise: Chinese Zodiac sign with list</h3>
+					<p>Simplify <a href="session2.html#/48">the exercise we saw at the end of session 2</a> by using a list of string storing all the animals name, instead of multiple if and elif statement.</p>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">def main():
+    year = int(input("Enter a year: "))
+    animals = ["monkey", "rooster", "dog", "pig", "rat", "ox",
+               "tiger", "rabbit", "dragon", "snake", "horse", "sheep"]
+    print(year, "is", animals[year % 12])
+
+main()</code></pre></div>
+				</section>
+				<section>
+					<h3>Reminder</h3>
+					<p>The string is a <strong>sequence</strong></p>
+					<p>The items of a sequence can be <strong>accessed</strong> through indexes</p>
+					<table style="width:100%">
+					  <tr>
+						<th>Items (characters)</th>
+						<td>a</td>
+						<td>b</td>
+						<td>r</td>
+						<td>a</td>
+						<td>c</td>
+						<td>a</td>
+						<td>d</td>
+						<td>a</td>
+						<td>b</td>
+						<td>r</td>
+						<td>a</td>
+					  </tr>
+					  <tr>
+						<th>Indexes</th>
+						<td>0</td>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+						<td>8</td>
+						<td>9</td>
+						<td>10</td>
+					  </tr>
+					</table>
+					<p>Get the first element of the sequence:</p>
+					<pre class="solution-content python" ><code>my_string_variable = "abracadabra"
+first_elem = my_string_variable[0]</code></pre>
+				</section>
+				<section>
+					<h3>Manipulate element of a List with indexes</h3>
+					<p>You can also <strong>access</strong> element of a list with indexes <strong>BUT</strong> you can also <strong>modify</strong> them:</p>
+					<iframe src="https://trinket.io/embed/python3/1c5817ee59" width="100%" height="120" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+					<p>contrary to the string type.</p>
+					<iframe src="https://trinket.io/embed/python3/d6fa9f127e" width="100%" height="120" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+					<h3>Difference between mutable and immutable objects</h3>
+					<ul>
+						<li>You cannot modify an <strong>immutable</strong> object such as a string.</li>
+						<li>You can modify a <strong>mutable</strong> object such as a list.</li>
+					</ul>
+				</section>
+				<section>
+					<h3>The +, *, [ : ], and in Operators (1/2)</h3>
+					<p><strong>+</strong> is for concatenating list</p>
+					<p><strong>*</strong> is for repeating a list</p>
+					<p><strong>[ : ]</strong> is the slice operator, for extracting a sublist from a list</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">>>> list1 = [2, 3]
+>>> list2 = [1, 9]
+>>> list3 = list1 + list2
+>>> list3
+[2, 3, 1, 9]
+>>> list3 = 2 * list1
+>>> list3
+[2, 3, 2, 3]
+>>> list4 = list3[2:4]
+>>> list4
+[2, 3]</code></pre>
+				</section>
+				<section>
+					<h3>The +, *, [ : ], and in Operators (2/2)</h3>
+					<ul>
+						<li>Get the last element of a list with a negative index</li>
+						<li>Check if an element is in a list with the <strong>in</strong> operator</li>
+					</ul>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">>>> list1 = [2, 3, 5, 2, 33, 21]
+>>> list1[-1]
+21
+>>> list1[-3]
+2
+>>> list1 = [2, 3, 5, 2, 33, 21]
+>>> 2 in list1
+True
+>>> list1 = [2, 3, 5, 2, 33, 21]
+>>> 2.5 in list1
+False</code></pre>
+				</section>
+				<section>
                     <h3>Linear Search</h3>
     <canvas id="LinearSearch" data-processing-sources="pde/LinearSearch.pde" style="border-style:solid"></canvas>
     <p style="text-align: center">Key: <input type="text" value="8" id="key" style="text-align: right"/>
     <button type="button" class="button" onclick="step('LinearSearch')">Step</button>
     <button type="button" class="button" onclick="reset('LinearSearch')">Reset</button></p>
-
 				</section>
 				<section>
 					<h3>Linear Search</h3>
