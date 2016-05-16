@@ -60,20 +60,16 @@
 					<h3>Objectives</h3>
 					<ul style="font-size: 26px;">
 						<li>To come back on the notion of object and type.</li>
-						<li>To introduce to the type "List".</li>
-						<li>To invoke list’s append, insert, extend, remove, pop, index, count, sort, reverse methods.</li>
+						<li>To introduce to the type "List" and its methods.</li>
 						<li>To use the len, min/max, sum, and random.shuffle functions for a list.</li>
+						<li>To develop and invoke functions with list arguments and return value.</li>
 						<li>To access list elements using indexed variables.</li>
 						<li>To obtain a sublist using the slicing operator [start:end].</li>
 						<li>To use +, *, and in/not in operators on lists.</li>
 						<li>To traverse elements in a list using a for-each loop.</li>
 						<li>To create lists using list comprehension.</li>
-						<li>To compare lists using comparison operators.</li>
 						<li>To split a string to a list using the str’s split method.</li>
 						<li>To copy contents from one list to another.</li>
-						<li>To develop and invoke functions with list arguments and return value.</li>
-						<li>To search elements using the linear or binary search algorithm.</li>
-						<li>To sort a list using the selection sort and the insertion sort.</li>
 					</ul>
 				</section>
 				<section>
@@ -197,7 +193,7 @@ append(...) method of builtins.list instance
 					</table>
 				</section>
 				<section>
-					<h3>Exercise</h3>
+					<h3>Exercise 1</h3>
 					<p style="font-size: 26px">Write a program that reads integers from the user and stores them in a list (use input() and append()). Your program should continue reading values until the user enters 'q' (the sentinel value).
 						Then it should display all of the values entered by the user in order from smallest to largest, with one value appearing on each line. Use either the sort method or the sorted
 built in function to sort the list.</p>
@@ -249,7 +245,7 @@ for element in data:
 					<p>Try to use functions in the next exercises.</p>
 				</section>
 				<section>
-					<h3>Exercise: Chinese Zodiac sign with list</h3>
+					<h3>Exercise 2: Chinese Zodiac sign with list</h3>
 					<p>Simplify <a href="session2.html#/48">the exercise we saw at the end of session 2</a> by using a list of string storing all the animals name, instead of multiple if and elif statement.</p>
 					<div class="solution">
 						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
@@ -261,6 +257,46 @@ for element in data:
     print(year, "is", animals[year % 12])
 
 main()</code></pre></div>
+				</section>
+				<section>
+					<h3>Passing Lists to Functions</h3>
+					<iframe src="https://trinket.io/embed/python3/0e7b0b2d6f" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+				</section>
+				<section>
+					<h3>Returning a List from a Function</h3>
+					<p>Example: a function that returns a reversed list</p>
+					<iframe src="https://trinket.io/embed/python3/fef0183b9c" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+					<p>The function <strong>reverse</strong> actually exists for doing the same thing</p>
+				</section>
+				<section>
+					<h3>Exercise 3:</h3>
+					<p>Complete this program to get the minimum number of the list and its index</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">import random
+random_list = [random.choice(list(range(1, 100))) for _ in range(10)]
+def get_min(random_list):
+    # to complete
+    pass
+get_min()</code></pre>
+				</section>
+				<section>
+					<h3>Solution</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">import random
+random_list = [random.choice(list(range(1, 100))) for _ in range(10)]
+def get_min_index(any_list):
+    min = 100
+    index = 0
+    for i in any_list:
+        if i <= min:
+            min = i
+            min_index = index
+        index += 1
+    print("the min is", min)
+    print("its index is", min_index)
+
+get_min_index(random_list)</code></pre></div>
 				</section>
 				<section>
 					<h3>Reminder</h3>
@@ -350,6 +386,211 @@ True
 False</code></pre>
 				</section>
 				<section>
+					<h3>List comprehensions</h3>
+					<ul>
+						<li>List comprehensions provide a concise way to create lists</li>
+						<ul>
+							<li>Transforming a list with operation on each element</li>
+							<li>Filtering a list, keeping only elements that satisfy a condition</li>
+						</ul>
+					</ul>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">>>> list1 = [x for x in range(0, 5)]
+>>> list1
+[0, 1, 2, 3, 4]
+>>> list2 = [0.5 * x for x in list1]
+>>> list2
+[0.0, 0.5, 1.0, 1.5, 2.0]
+>>> list3 = [x for x in list2 if x < 1.5]
+>>> list3
+[0.0, 0.5, 1.0]</code></pre>
+				</section>
+				<section>
+					<h3>Splitting a String to a List</h3>
+					<p>You can convert a string to a list with the <strong>split</strong> function on string.</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">>>> items = "Welcome to the UK".split()
+>>> print(items)
+['Welcome', 'to', 'the', 'UK']
+>>> items = "34#13#78#45".split("#")
+>>> print(items)
+['34', '13', '78', '45']</code></pre>
+					<p>You can convert back a list to a string with the <strong>join</strong> function  on string</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">>>> print(items)
+['Welcome', 'to', 'the', 'UK']
+>>> print(" ".join(items))
+'Welcome to the UK'
+</code></pre>
+				</section>
+				<section>
+				<p>
+					<h3>Exercise 4 - Eliminate duplicates</h3>
+					<p>Write a function that returns a new list by eliminating the duplicate values in the list. Use the following function header:
+<pre class="solution-content python"><code>def eliminateDuplicates(lst):</code></pre></p>
+<p>Write a test program that reads in a list of integers, invokes the function, and displays the result. Here is the sample run of the program:</p>
+<pre>Enter ten numbers: 1 2 3 2 1 6 3 4 5 2
+The distinct numbers are: 1 2 3 6 4 5</pre>
+				</section>
+				<section>
+					<h3>Solution</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+				<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">def main():
+    # Read numbers as a string from the console
+    s = input("Enter numbers: ")
+    items = s.split() # Extracts items from the string
+    numbers = [ int(x) for x in items ] # Convert items to numbers
+
+    print("The distinct numbers are:", eliminateDuplicates(numbers))
+
+def eliminateDuplicates(list):
+    result = []
+    for element in list:
+        if not (element in result):
+            result.append(element)
+
+    return result
+
+main()</code></pre></div>
+				</section>
+				<section>
+					<h3>Exercise 5 = Anagrams</h3>
+					<p>Write a function that checks whether two words are anagrams. Two words are anagrams if they contain the same letters. For example, silent and listen are anagrams. The header of the function is:
+<pre class="solution-content python"><code>def isAnagram(s1, s2):</code></pre></p>
+<p>(Hint: Obtain two lists for the two strings. Sort the lists and check if two lists
+are identical.)</p>
+<p>Write a test program that prompts the user to enter two strings and, if they are anagrams, displays is an anagram; otherwise, it displays is not an anagram.</p>
+				</section>
+				<section>
+					<h3>Solution</h3>
+					<div class="solution">
+					<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+					<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">def main():
+    s1 = input("Enter the first string: ").strip()
+    s2 = input("Enter the second string: ").strip()
+
+    print(s1, "and", s2, "are",
+      ("anagram." if isAnagram(s1, s2) else "not anagram."))
+
+def isAnagram(s1, s2):
+    if len(s1) != len(s2):
+        return False
+
+    newS1 = sort(s1);
+    newS2 = sort(s2);
+
+    return newS1 == newS2
+
+def sort(s):
+    r = list(s)
+    r.sort()
+
+    result = ""
+    for ch in r:
+        result += ch
+
+    return result
+
+main()
+</code></pre></div>
+				</section>
+				<section>
+					<h3>Copying Lists</h3>
+					<p>Often, in a program, you need to duplicate a list or a part of a list. In such cases you could attempt to use the assignment statement (=):</p>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">list1 = [1, 2, 3]
+list2=list1</code></pre>
+					<p><strong>But you are not copying the list here! You are copying its reference.</strong><p></p>
+				</section>
+				<section>
+					<h3>What is happening in memory</h3>
+					<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=list1+%3D+%5B1,+2,+3%5D%0Alist2+%3D+list1%0Alist2.append('four'%29%0Aprint(list1%29%0Aprint(list2%29&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=3&rawInputLstJSON=%5B%5D&curInstr=5&codeDivWidth=350&codeDivHeight=400"> </iframe>
+				</section>
+				<section>
+					<h3>Copying a list the correct way</h3>
+					<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">>>> list2 = [x for x in list1]
+>>> list2 = list1[:]
+>>> list2 = list(list1)
+>>> list2 = list(list1)
+>>> import copy
+>>> list2 = copy.copy(list1)
+>>> list2 = copy.deepcopy(list1) # will copy the object as well</code></pre>
+				</section>
+				<section>
+					<h3>What is happening in memory for a real copy</h3>
+					<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=list1+%3D+%5B1,+2,+3%5D%0Alist2+%3D+list1%5B%3A%5D%0Alist1.append('four'%29%0Aprint(list1%29%0Aprint(list2%29&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=3&rawInputLstJSON=%5B%5D&curInstr=5&codeDivWidth=350&codeDivHeight=400"> </iframe>
+				</section>
+				<section>
+					<h3>Pass By Value</h3>
+					<p>There are important differences between passing immutable or mutable objects as arguments to a function.</p>
+					<p>String and numeric values (integer and float) are <strong>immutable</strong>, they do not get changed</p>
+					<p>Lists are <strong>mutable</strong>, they can be changed</p>
+				</section>
+				<section>
+					<h3>Example</h3>
+					<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=def+m(number,+list_of_numbers%29%3A%0A++++number+%3D+1001%0A++++list_of_numbers%5B0%5D+%3D+5555%0A%0Adef+main(%29%3A%0A++++x+%3D+1%0A++++y+%3D+%5B1,+2,+3%5D%0A++++m(x,+y%29%0A++++print(%22x+is+%22,+str(x%29%29%0A++++print(%22y%5B0%5D+is%22,+str(y%5B0%5D%29%29%0A+++%0Amain(%29&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=3&rawInputLstJSON=%5B%5D&curInstr=14&codeDivWidth=350&codeDivHeight=400"> </iframe>
+				</section>
+				<section>
+					<h3>Exercise 6: Hangman</h3>
+					<p style="font-size: 20px">Write a hangman game that randomly generates a word and prompts the user to guess one letter at a time, as shown in the sample run.</p>
+					<p style="font-size: 20px">Each letter in the word is displayed as an asterisk. When the user makes a correct guess, the actual letter is then displayed. When the user finishes a word, display the number of misses and ask the user whether to continue playing. Create a list to store the words, as follows:</p>
+					<pre class="solution-content python"><code style="font-size: 16px">words = ["write", "that", "program", ...]</code></pre>
+					<pre style="line-height: 100%;font-size: 16px">(Guess) Enter a letter in word ******* > p
+(Guess) Enter a letter in word p****** > r
+(Guess) Enter a letter in word pr**r** > p
+    p is already in the word
+(Guess) Enter a letter in word pr**r** > o
+(Guess) Enter a letter in word pro*r** > g
+(Guess) Enter a letter in word progr** > n
+    n is not in the word
+(Guess) Enter a letter in word progr** > m
+(Guess) Enter a letter in word progr*m > a
+The word is program. You missed 1 time
+Do you want to guess another word? Enter y or n></pre>
+				</section>
+				<section>
+					<div class="solution">
+						<p class="show-solution" style="font-size: 20px"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<pre class="solution-content python"><code data-trim data-noescape style="line-height: 95%;font-size: 16px;margin-top: 0px; margin-bottom: 0px;">import random
+
+def main():
+    words = ["write", "program", "that", "receive", "positive", "change", "study", "excellent", "nice"]
+    while True:
+        index = random.randint(0, len(words) - 1)
+        hiddenWord = words[index]
+        guessedWord = len(hiddenWord) * ['*']
+        numberOfCorrectLettersGuessed = 0
+        numberOfMisses = 0
+        while numberOfCorrectLettersGuessed < len(hiddenWord):
+            letter = input("(Guess) Enter a letter in word " + toString(guessedWord) + " > ").strip()
+            if letter in guessedWord:
+                print("\t", letter, "is already in the word")
+            elif hiddenWord.find(letter) < 0:
+                print("\t", letter, "is not in the word")
+                numberOfMisses += 1
+            else:
+                k = hiddenWord.find(letter)
+                while k >= 0:
+                    guessedWord[k] = letter
+                    numberOfCorrectLettersGuessed += 1
+                    k = hiddenWord.find(letter, k + 1)
+        print("The word is " + hiddenWord + ". You missed "
+                + str(numberOfMisses) + (" time" if (numberOfMisses <= 1) else " times"))
+        anotherGame = input("Do you want to guess for another word? Enter y or n> ").strip()
+        if anotherGame == 'n':
+            print("Finished")
+            break
+
+def toString(list):
+    s = ""
+    for e in list:
+        s += e
+    return s
+
+main()</code></pre></div>
+				</section>
+				<!--
+				<section>
                     <h3>Linear Search</h3>
     <canvas id="LinearSearch" data-processing-sources="pde/LinearSearch.pde" style="border-style:solid"></canvas>
     <p style="text-align: center">Key: <input type="text" value="8" id="key" style="text-align: right"/>
@@ -391,6 +632,7 @@ False</code></pre>
 					<iframe width="800" height="500" frameborder="0" src="embedded/insertion_sort.html"
         sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
 				</section>
+				-->
 
 			</div>
 		</div>
