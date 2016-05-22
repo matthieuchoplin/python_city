@@ -276,10 +276,10 @@ random_list = [random.choice(list(range(1, 100))) for _ in range(10)]
 def get_min(random_list):
     # to complete
     pass
-get_min()</code></pre>
+get_min(random_list)</code></pre>
 				</section>
 				<section>
-					<h3>Solution</h3>
+					<h3>Solution without using built in functions non list methods</h3>
 					<div class="solution">
 						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
 						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
@@ -296,6 +296,21 @@ def get_min_index(any_list):
     print("the min is", min)
     print("its index is", min_index)
 
+print(random_list)
+get_min_index(random_list)</code></pre></div>
+				</section>
+				<section>
+					<h3>Solution using built in functions and list methods</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;margin-top: 0px; margin-bottom: 0px;">import random
+random_list = [random.choice(list(range(1, 100))) for _ in range(10)]
+def get_min_index(any_list):
+    print("the min is", min(any_list))  # using the min builtin
+    print("its index is", random_list.index(min(random_list))) # using the index method
+
+print(random_list)
 get_min_index(random_list)</code></pre></div>
 				</section>
 				<section>
