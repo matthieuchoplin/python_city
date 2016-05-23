@@ -165,18 +165,64 @@ the changes made to the parameter inside the function.</p>
                 <section>
                     <h3>Modularizing Code</h3>
                     <p>Functions can be used to reduce redundant coding and enable code reuse. Functions can also be used to modularize code and improve the quality of the program.</p>
-                    <p>Example, download the following file and put them in the current pycharm project (right click and save as): </p>
+                    <p>Example, download the following files and put them in the current Pycharm project (right click and save as): </p>
                     <ul>
                         <li><a href="exercises/GCDFunction.py">GCDFunction.py</a></li>
                         <li><a href="exercises/TestGCDFunction.py">TestGCDFunction.py</a></li>
-                        <li><a href="exercises/PrimeNumberFunction.py">PrimeNumberFunction.py</a></li>
                     </ul>
                 </section>
 
                 <section>
                     <h3>Exercise: Use the isPrime Function</h3>
-                    <p>The program <a href="exercises/PrimeNumberFunction.py">PrimeNumberFunction.py</a> (that you have just downloaded) provides the isPrime(number) function for testing whether a number is prime.</p>
+                    <p>The program <a href="exercises/PrimeNumberFunction.py">PrimeNumberFunction.py</a> (right click and save as) provides the isPrime(number) function for testing whether a number is prime.</p>
                     <p>Use this function to find the number of prime numbers less than 10,000.</p>
+                    <ul>
+                        <li>Reuse the function in the same file</li>
+                        <li>Import the function in an other file</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Using the function in the same file</p>
+                    <div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<pre class="solution-content python"><code data-trim data-noescape>def main():
+    count = 0
+    N = 10000
+    for number in range(2, N):
+        if isPrime(number):
+            count += 1
+    print("The number of prime number <", 10000, "is", count)
+
+# Check whether number is prime
+def isPrime(number):
+    for divisor in range(2, number // 2 + 1):
+        if number % divisor == 0: # If true, number is not prime
+            return False # number is not a prime
+    return True # number is prime
+
+main()</code></pre></div>
+                </section>
+
+                <section>
+                    <p>Import the function from an other file</p>
+                    <div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<pre class="solution-content python"><code data-trim data-noescape>from PrimeNumberFunction import isPrime
+
+def main():
+    count = 0
+    N = 10000
+    for number in range(2, N):
+        if isPrime(number):
+            count += 1
+
+    print("The number of prime number <", 10000, "is", count)
+
+main()
+</code></pre></div>
                 </section>
 
                 <section>
@@ -330,6 +376,85 @@ Sun Mon Tue Wed Thu Fri Sat
                         <li>Easier Developing, Debugging and Testing</li>
                         <li>Better facilitating Teamwork</li>
                     </ul>
+                </section>
+
+                <section>
+                    <h3>Homework: credit card number validation (1)</h3>
+                    <p>Credit card numbers follow certain patterns: It must have between 13 and 16 digits, and the number must start with:</p>
+                    <ul>
+                        <li>4 for Visa cards</li>
+                        <li>5 for MasterCard credit cards</li>
+                        <li>37 for American Express cards</li>
+                        <li>6 for Discover cards</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Homework: credit card number validation (2)</h3>
+                    <p>In 1954, Hans Luhn of IBM proposed an algorithm for validating credit card numbers. The
+algorithm is useful to <strong>determine whether a card number is entered correctly</strong>.</p>
+                    <p>Credit card numbers are generated following this validity
+check, commonly known as the Luhn check or the Mod 10 check, which can be described as
+follows (for illustration, consider the card number 4388576018402626):</p>
+
+                </section>
+
+                <section>
+                    <h3>Homework: credit card number validation (3)</h3>
+                    <ul>
+                        <li>1. Double every second digit from right to left. If doubling of a digit results in a two­digit number,
+add up the two digits to get a single­digit number</li>
+                        <img src="imgs/credit_card_number.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 350px"></ul>
+
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h3>Homework: credit card number validation(4)</h3>
+                    <ul>
+                        <li>2. Now add all single­digit numbers from Step 1. <br/>
+4 + 4 + 8 + 2 + 3 + 1 + 7 + 8 = 37</li>
+                        <li>3. Add all digits in the odd places from right to left in the card number.<br/>
+6 + 6 + 0 + 8 + 0 + 7 + 8 + 3 = 38</li>
+                        <li>4. Sum the results from Steps 2 and 3. <br/>
+37 + 38 = 75</li>
+                        <li>5. If the result from Step 4 is divisible by 10, the card number is valid; otherwise, it is invalid. For
+example, the number 4388576018402626 is invalid, but the number 4388576018410707 is
+valid.</li>
+
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Homework: credit card number validation (5)</h3>
+                    <p>Write a program that prompts the user to enter a credit card number as an integer.
+Display whether the number is valid or invalid. Design your program to use the following
+functions:</p>
+                    <pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 18px;margin-top: 0px; margin-bottom: 0px;">#Return true if the card number is valid
+def isValid(number):
+#Get the result from Step2
+def sumOfDoubleEvenPlace(number):
+#Return this number if it is a single digit, otherwise,return
+#the sum of the two digits
+def getDigit(number):
+#Return sum of odd place digits in number
+def sumOfOddPlace(number):
+#Return true if the digit d is a prefix for number
+def prefixMatched(number,d):
+#Return the number of digits in d
+def getSize(d):
+#Return the first k number of digits from number.If the
+#number of digits in number is less than k, return number.
+def getPrefix(number,k):</code></pre>
+                </section>
+
+                <section>
+                <div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+						<p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<p class="solution-content python">You can download a solution here: <a href="exercises/credit_card_number_validation.py"/>credit_card_number_validation.py</a></p>
+                </div>
                 </section>
 
 			</div>
