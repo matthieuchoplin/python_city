@@ -107,8 +107,8 @@ def isLeapYear(year):
 
 def main():
     # Prompt the user to enter year and month 
-    year = eval(input("Enter full year (e.g., 2001): "))
-    month = eval(input(("Enter month as number between 1 and 12: ")))
+    year = int(input("Enter full year (e.g., 2001): "))
+    month = int(input(("Enter month as number between 1 and 12: ")))
 
     # Print calendar for the month of the year
     printMonth(year, month)

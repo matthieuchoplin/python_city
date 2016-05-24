@@ -1,5 +1,5 @@
 def main():
-    number = eval(input("Enter a credit card number as a long integer: "))
+    number = int(input("Enter a credit card number as a long integer: "))
     
     if isValid(number):
         print(number, "is valid")
