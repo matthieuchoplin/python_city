@@ -396,6 +396,113 @@ assert f.closed
 </code></pre>
                 </section>
 
+                <section>
+                    <h3>The json file format</h3>
+                    <ul>
+                        <li>json (Javascript Object Notation) is a lightweight <strong>data interchange format</strong> with which you:
+                            <ul>
+                                <li>dump data ("serialize")</li>
+                                <li>load data ("deserialize")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <pre class="solution-content python"><code data-trim data-noescape>import json
+serialized_data = json.dumps(
+    ['foo', {'bar': ('baz', None, 1.0, 2)}])
+print(serialized_data)
+deserialized_data = json.loads(a)
+print(deserialized_data)
+</code></pre>
+                </section>
+
+                <section>
+                    <h3>Example with a simple rest API</h3>
+                    <p>The website <a href="https://restcountries.eu/">https://restcountries.eu/</a> has a json API for getting information about countries (capital, population...)</p>
+                    <p>Using <strong>urllib</strong> and <strong>json</strong> libraries, let us retrieve the capitals of each country</p>
+                    <pre class="solution-content python"><code data-trim data-noescape>import json
+from urllib import request
+
+infile = request.urlopen(
+    'https://restcountries.eu/rest/v1/all')
+content_as_python_obj = json.loads(infile.read().decode())
+for country in content_as_python_obj:
+    print(country['capital'])</code></pre>
+
+                </section>
+
+                <section>
+                    <h3>API</h3>
+                    <ul>
+                        <li>In the previous case, an API (Application Programming Interface) is simply a specification of remote calls exposed to the API consumers</li>
+                        <li>We are using the API as a service by just calling (doing a GET) its available urls</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Example with the Google map API</h3>
+                    <pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%; font-size: 22px">from urllib import parse, request
+import json
+
+serviceurl = 'http://maps.googleapis.com/maps/api/geocode/json?'
+
+while True:
+    address = input('Enter location (q to quit): ')
+    if len(address) < 1 or address.lower() == 'q':  # sentinel value, press q to quit
+        break
+    url = serviceurl + parse.urlencode({'sensor': 'false', 'address': address})
+    print('Retrieving', url)
+    uh = request.urlopen(url)
+    data = uh.read().decode('utf-8')
+    print('Retrieved', len(data), 'characters')
+    js = json.loads(data)
+    if 'status' not in js or js['status'] != 'OK':
+        print('==== Failure To Retrieve ====')
+        print(data)
+        continue
+    lat = js["results"][0]["geometry"]["location"]["lat"]
+    lng = js["results"][0]["geometry"]["location"]["lng"]
+    print('lat', lat, 'lng', lng)
+    location = js['results'][0]['formatted_address']
+    print(location)</code></pre>
+                </section>
+
+                <section>
+                    <h3>Example with the Twitter API using the client Tweepy</h3>
+                    <ol>
+                        <li>Navigate to <a href="https://apps.twitter.com/">https://apps.twitter.com/</a></li>
+                        <li>Click the button to create a new application</li>
+                        <li>Enter dummy data</li>
+                        <li>Once the application is created, get the following:</li>
+                            <ul>
+                                <li>consumer_key</li>
+                                <li>consumer_secret</li>
+                                <li>access_token</li>
+                                <li>access_secret</li>
+                            </ul>
+                    </ol>
+                </section>
+
+                <section>
+                    <h3>Get tweet with #python</h3>
+                    <pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%; font-size: 28px">import tweepy
+
+consumer_key = 'get_your_own'
+consumer_secret = 'get_your_own'
+access_token = 'get_your_own'
+access_secret = 'get_your_own'
+
+def main():
+    auth = tweepy.auth.OAuthHandler(consumer_key,
+                        consumer_secret)
+    auth.set_access_token(access_token, access_secret)
+    api = tweepy.API(auth)
+
+    tweets = api.search(q='#python')
+    for t in tweets:
+        print(t.created_at, t.text, '\n')
+main()</code></pre>
+                </section>
+
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
@@ -417,6 +524,7 @@ assert f.closed
 					{ src: 'plugin/menu/menu.js' },
 					{ src: 'plugin/jquery-2.0.0.min.js' },
 					{ src: 'plugin/custom.js' },
+					{ src: 'plugin/clipboard.min.js' },
 
 				]
 			});
