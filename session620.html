@@ -410,7 +410,7 @@ assert f.closed
 serialized_data = json.dumps(
     ['foo', {'bar': ('baz', None, 1.0, 2)}])
 print(serialized_data)
-deserialized_data = json.loads(a)
+deserialized_data = json.loads(serialized_data)
 print(deserialized_data)
 </code></pre>
                 </section>
