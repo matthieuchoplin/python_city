@@ -44,7 +44,6 @@
                         <li>To access the members of objects using the dot operator (.)</li>
                         <li>To reference an object itself with the self parameter</li>
                         <li>To use UML graphical notation to describe classes and objects</li>
-                        <li>To distinguish between immutable and mutable</li>
                         <li>To hide data fields to prevent data corruption and make classes easy to maintain</li>
                         <li>To apply class abstraction and encapsulation to software development</li>
                         <li>To explore the differences between the procedural paradigm and the object oriented paradigm</li>
@@ -58,7 +57,7 @@
 object represents an entity in the real world that can be distinctly identified. For
 example, a student, a desk, a circle, a button, and even a loan can all be
 viewed as objects. </li>
-                        <li>An object has a unique identity, state, and behaviors. The state of an object
+                        <li>An object has a unique <strong>identity</strong>, <strong>state</strong>, and <strong>behaviors</strong>. The state of an object
 consists of a set of data fields (also known as properties) with their current
 values. The behavior of an object is defined by a set of methods. </li>
                     </ul>
@@ -76,9 +75,9 @@ behavior defines what the object does.</li>
 				<section>
 					<h3>Classes</h3>
                     <ul>
-                        <li>A Python class uses variables to store data fields and defines methods to
+                        <li>A Python class uses variables to store <strong>data fields</strong> and defines <strong>methods</strong> to
 perform actions. Additionally, a class provides a special type method, known as
-initializer, which is invoked to create a new object. An initializer can perform any
+<strong>initializer</strong>, which is invoked to create a new object. An initializer can perform any
 action, but initializer is designed to perform initialising actions, such as creating
 the data fields of objects. </li>
                     </ul>
@@ -89,7 +88,7 @@ the data fields of objects. </li>
 
 				<section>
 					<h3>Example for creating a class</h3>
-                    <div><pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 18px;margin-top: 0px; margin-bottom: 0px;">import math
+                    <div><pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 28px;margin-top: 0px; margin-bottom: 0px;">import math
 
 class Circle:
     # Construct a circle object
@@ -137,17 +136,17 @@ main() # Call the main function</code></pre></div>
 				<section>
 					<h3>Constructing Objects</h3>
                     <ul>
-                        <li>Once a class is defined, you can create objects from the class by using the following syntax, called a constructor:</li>
+                        <li>Once a class is defined, you can create objects from the class by using the following syntax, called a <strong>constructor</strong>:</li>
                     </ul>
-                    <div><pre class="solution-content python"><code>className(arguments)</code></pre></div>
+                    <div><pre class="solution-content python"><code>my_new_object = ClassName(optional_arguments)</code></pre></div>
                     <img src="imgs/object_self.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 300px"/>
 				</section>
 
 				<section>
 					<h3>Constructing Objects</h3>
-                    <ul>
-                        <li>The effect of constructing a Circle object using Circle(5) is shown below:</li>
-                    </ul>
+                    <p>The effect of constructing a Circle object with ...</p>
+                    <div><pre class="solution-content python"><code>my_new__circle_object = Circle(5)</code></pre></div>
+                    <p>... is shown below:</p>
                     <img src="imgs/object_construct.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 300px"/>
 
 				</section>
@@ -155,11 +154,11 @@ main() # Call the main function</code></pre></div>
 				<section>
 					<h3>Instance Methods</h3>
                     <ul>
-                        <li>Methods are functions defined inside a class. They are invoked by objects to
+                        <li>Methods are <strong>functions defined inside a class</strong>. They are <strong>invoked by objects</strong> to
 perform actions on the objects. For this reason, the methods are also called
 instance methods in Python.</li>
                         <li>You probably noticed that all the methods including the constructor have the
-first parameter self, which refers to the object that invokes the method. You can
+first parameter <strong>self</strong>, which refers to the object that invokes the method. You can
 use any name for this parameter. But by convention, self is used. </li>
                     </ul>
 				</section>
@@ -187,11 +186,11 @@ getPerimeter and getArea methods.</li>
                         <li>Note that the first parameter is special. It is used in the implementation of the
 method, but not used when the method is called. So, what is this parameter self
 for? Why does Python need it?</li>
-                        <li>self is a parameter that represents an object. Using self, you can access
-instance variables in an object. Instance variables are for storing data fields.
+                        <li><strong>self is a parameter that represents an object. Using self, you can access
+instance variables in an object.</strong> Instance variables are for storing data fields.
 Each object is an instance of a class. Instance variables are tied to specific
-objects. Each object has its own instance variables. You can use the syntax
-self.x to access the instance variable x for the object self in a method. </li>
+objects. Each object has its own instance variables. <strong>You can use the syntax
+self.x to access the instance variable x for the object self in a method.</strong> </li>
                     </ul>
 				</section>
 
@@ -202,7 +201,7 @@ self.x to access the instance variable x for the object self in a method. </li>
 
 				<section>
 					<h3>Example: Defining Classes and Creating Objects</h3>
-                    <img src="imgs/example_uml.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 500px"/>
+                    <img src="imgs/example_uml.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 450px"/>
 				</section>
 
 				<section>
@@ -215,7 +214,7 @@ self.x to access the instance variable x for the object self in a method. </li>
 
 				<section>
 					<h3>Trace execution</h3>
-                    <iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=import+math+%0A%0Aclass+Circle%3A%0A++++%23+Construct+a+circle+object+%0A++++def+__init__(self,+radius+%3D+1%29%3A%0A++++++++self.radius+%3D+radius%0A%0A++++def+getPerimeter(self%29%3A%0A++++++++return+2+*+self.radius+*+math.pi%0A%0A++++def+getArea(self%29%3A%0A++++++++return+self.radius+*+self.radius+*+math.pi%0A++++++++++%0A++++def+setRadius(self,+radius%29%3A%0A++++++++self.radius+%3D+radius%0A%0Amy_circle+%3D+Circle(5.0%29%0Ayour_circle+%3D+Circle(%29%0Ayour_curcle.radius+%3D+100&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=3&rawInputLstJSON=%5B%5D&curInstr=0&codeDivWidth=350&codeDivHeight=400"> </iframe>
+                    <p>See what is happening in memory with <a href="http://pythontutor.com/visualize.html#code=import+math%0A%0Aclass+Circle%3A%0A++++%23+Construct+a+circle+object%0A++++def+__init__(self,+radius+%3D+1%29%3A%0A++++++++self.radius+%3D+radius%0A%0A++++def+getPerimeter(self%29%3A%0A++++++++return+2+*+self.radius+*+math.pi%0A%0A++++def+getArea(self%29%3A%0A++++++++return+self.radius+*+self.radius+*+math.pi%0A%0A++++def+setRadius(self,+radius%29%3A%0A++++++++self.radius+%3D+radius%0A++++++++%0Amy_circle+%3D+Circle(5.0%29%0Ayour_circle+%3D+Circle(%29%0Ayour_circle.radius+%3D+100&mode=display&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=3&rawInputLstJSON=%5B%5D&curInstr=0" target="_blank">Pythontutor</a> (click link)</p>
 				</section>
 
                 <section>
@@ -225,8 +224,8 @@ self.x to access the instance variable x for the object self in a method. </li>
                         <li>Two data fields named width and height.</li>
                         <li>A constructor that creates a rectangle with the specified width and height.
 The default values are 1 and 2 for the width and height, respectively.</li>
-                        <li>A method named getArea()that returns the area of this rectangle</li>
-                        <li>A method named getPerimeter()that returns the perimeter</li>
+                        <li>A method named getArea() that returns the area of this rectangle</li>
+                        <li>A method named getPerimeter() that returns the perimeter</li>
                     </ul>
                     <p style="font-size: 28px">Draw the UML diagram for the class, and then implement the class. Write a test program that
 creates two Rectangle objects—one with width 4 and height 40 and the other with width 3.5 and
@@ -248,7 +247,7 @@ two leading underscores.</li>
 
 				<section>
 					<h3>Example for making fields private</h3>
-                    <div><pre class="solution-content python"><code data-trim data-noescape style="margin-top: 0px; margin-bottom: 0px;">import math
+                    <div><pre class="solution-content python"><code data-trim data-noescape style="margin-top: 0px; margin-bottom: 0px;height: 450px">import math
 
 class Circle:
     # Construct a circle object
@@ -297,6 +296,17 @@ encapsulated and hidden from the user. </li>
                     </ul>
                     <img src="imgs/encapsulation.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 300px"/>
 				</section>
+
+                <section>
+                    <h3>The Loan Class example</h3>
+                    <p>A specific loan can be viewed as an object of a Loan class.
+                        The interest rate, loan amount, and loan period are its data properties, and
+                        computing monthly payment and total payment are its methods.
+                        When you buy a car, a loan object is created by instantiating the class with your loan interest
+                        rate, loan amount, and loan period. You can then use the methods to find the monthly payment and
+                        total payment of your loan. As a user of the Loan class, you don’t need to know how these methods
+                        are implemented.</p>
+                </section>
 
 				<section>
 					<h3>Designing the Loan Class</h3>
