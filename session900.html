@@ -56,6 +56,9 @@
 
                 <section>
                     <h3>Example</h3>
+                    <ul>
+                        <li>See the html of <a href="http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm">http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm</a></li>
+                    </ul>
                     <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 28px;">&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="Content-Type"
 content="text/html; charset=windows-1252"&gt;
 &lt;title&gt;Profile: Aphrodite&lt;/title&gt;
@@ -78,39 +81,65 @@ Hometown: Mount Olympus
                 <section>
                     <h3>Grab all html from a web page</h3>
                     <div><pre class="solution-content python"><code>from urllib.request import urlopen
-my_address = ""
+my_address = "http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm"
 html_page = urlopen(my_address)
-html_text = html.read().decode('utf-8')
+html_text = html_page.read().decode('utf-8')
 print(html_text)</code></pre></div>
+                    <p>What is the type of object that is returned?</p>
                 </section>
 
                 <section>
-                    <h3></h3>
+                    <h3>Parsing a web page with a String's method</h3>
                     <ul>
-                        <li></li>
-                        <li></li>
+                        <li>You can use the <strong>find()</strong> method</li>
+                        <li>Example:</li>
                     </ul>
-                    <p></p>
-                    <div><pre class="solution-content python"><code></code></pre></div>
+                    <iframe src="https://trinket.io/embed/python/48fb22f2f5" width="100%" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                    <!--
+                    <div><pre class="solution-content python"><code>this_is_my_string = 'Programming in python'
+string_to_find = input('Enter a string to find in \'%s\': ' % this_is_my_string)
+index_found = this_is_my_string.find(string_to_find)
+print(index_found)
+print(this_is_my_string[index_found])</code></pre></div>
+-->
                 </section>
 
                 <section>
-                    <h3></h3>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <p></p>
-                    <div><pre class="solution-content python"><code></code></pre></div>
+                    <h3>Find a word between 2 other words</h3>
+                    <iframe src="https://trinket.io/embed/python/b7f28ac6c1" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                    <!--
+                    <div><pre class="solution-content python"><code>my_string = 'some text with a special word ' \
+            '<strong>Equanimity</strong>'
+start_tag = "<strong>"
+end_tag = "</strong>"
+start_index = my_string.find(start_tag) + len(start_tag)
+end_index = my_string.find(end_tag)
+# We extract the text between
+# the last index of the first tag '>'
+# and the first index of the second tag '<'
+print(my_string[start_index:end_index])</code></pre></div>
+                    -->
                 </section>
 
                 <section>
-                    <h3></h3>
+                    <h3>Parsing the title with the find() method</h3>
+                    <div><pre class="solution-content python"><code>from urllib.request import urlopen
+my_address = "http://mattchoplin.com/python_city/" \
+             "practice/Profile_%20Aphrodite.htm"
+html_page = urlopen(my_address)
+html_text = html_page.read().decode('utf-8')
+start_tag = "&lt;title&gt;"
+end_tag = "&lt;/title&gt;"
+start_index = html_text.find(start_tag) + len(start_tag)
+end_index = html_text.find(end_tag)
+print(html_text[start_index:end_index])</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Limitation of the find() method</h3>
                     <ul>
-                        <li></li>
-                        <li></li>
+                        <li>Try to use the same script for extracting the title of <a href="http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm">http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm</a> </li>
                     </ul>
-                    <p></p>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
 
