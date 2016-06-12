@@ -434,31 +434,46 @@ Favorite Color: Wine
                     <ul>
                         <li>Sometimes we need to submit information to a web page, like a login page</li>
                         <li>We need a web browser for that</li>
-                        <li>pip install MechanicalSoup</li>
+                        <li><strong><a href="https://github.com/hickford/MechanicalSoup">MechanicalSoup</a></strong> is an alternative to urllib that can do all the same things but has more added
+                            functionality that will allow us to talk back to webpages without using a standalone browser,
+                            perfect for fetching web pages, clicking on buttons and links, and filling out and submitting forms</li>
                     </ul>
 
                 </section>
 
                 <section>
-                    <h3></h3>
+                    <h3>Installing MechanicalSoup</h3>
                     <ul>
-                        <li></li>
+                        <li>You can install it with pip: <em>pip install MechanicalSoup</em> or within Pycharm (like what we did earlier with BeautifulSoup)</li>
+                        <li>You might need to restart your IDE for MechanicalSoup to load and be recognised</li>
                     </ul>
 
                 </section>
 
                 <section>
-                    <h3></h3>
+                    <h3>MechanicalSoup: Opening a web page</h3>
                     <ul>
-                        <li></li>
+                        <li>Create a browser</li>
+                        <li>Get a web page which is a Response object</li>
+                        <li>Access the HTML content with the <em>soup</em> attribute</li>
+                        <div><pre class="solution-content python"><code>import mechanicalsoup
+
+my_browser = mechanicalsoup.Browser(soup_config={'features':'html.parser'})
+page = my_browser.get("http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm")
+print(page.soup)</code></pre></div>
+
                     </ul>
 
                 </section>
 
                 <section>
-                    <h3></h3>
+                    <h3>MechanicalSoup: Submitting values to a form</h3>
                     <ul>
-                        <li></li>
+                        <li>Have a look at this <a href="http://mattchoplin.com/python_city/practice/LogIn.htm">login page</a></li>
+                        <li>The important section is the login form</li>
+                        <li>We can see that there is a submission &lt;form&gt; named "login" that includes two &lt;input&gt; tags, one named
+                            <em>id</em> and the other one named <em>pass</em>.</li>
+                        <li>The third &lt;input&gt; is the actual "Submit" button</li>
                     </ul>
 
                 </section>
