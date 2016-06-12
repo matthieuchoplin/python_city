@@ -39,7 +39,8 @@
 					<h3>Objectives</h3>
 					<ul style="width:100%;font-size: 28px">
 						<li>Quick review of what HTML is</li>
-                        <li>Introduction to webscraping</li>
+                        <li>The find() string method</li>
+                        <li>Regular expressions</li>
 					</ul>
 				</section>
 
@@ -56,10 +57,8 @@
 
                 <section>
                     <h3>Example</h3>
-                    <ul>
-                        <li>See the html of <a href="http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm">http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm</a></li>
-                    </ul>
-                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 28px;">&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="Content-Type"
+                    <p><a href="http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm">http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm</a></p>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="Content-Type"
 content="text/html; charset=windows-1252"&gt;
 &lt;title&gt;Profile: Aphrodite&lt;/title&gt;
 &lt;link rel="stylesheet" type="text/css"&gt;&lt;/head&gt;
@@ -125,7 +124,7 @@ print(my_string[start_index:end_index])</code></pre></div>
                     <h3>Parsing the title with the find() method</h3>
                     <div><pre class="solution-content python"><code>from urllib.request import urlopen
 my_address = "http://mattchoplin.com/python_city/" \
-             "practice/Profile_%20Aphrodite.htm"
+             "practice/Profile_Aphrodite.htm"
 html_page = urlopen(my_address)
 html_text = html_page.read().decode('utf-8')
 start_tag = "&lt;title&gt;"
@@ -138,7 +137,184 @@ print(html_text[start_index:end_index])</code></pre></div>
                 <section>
                     <h3>Limitation of the find() method</h3>
                     <ul>
-                        <li>Try to use the same script for extracting the title of <a href="http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm">http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm</a> </li>
+                        <li>Try to use the same script for extracting the title of <a href="http://mattchoplin.com/python_city/practice/Profile_Poseidon.htm">http://mattchoplin.com/python_city/practice/Profile_Poseidon.htm</a> </li>
+                    </ul>
+                    <div><pre class="solution-content python"><code>from urllib.request import urlopen
+my_address = "http://mattchoplin.com/python_city/" \
+             "practice/Profile_Poseidon.htm"
+html_page = urlopen(my_address)
+html_text = html_page.read().decode('utf-8')
+start_tag = "<title>"
+end_tag = "</title>"
+start_index = html_text.find(start_tag) + len(start_tag)
+end_index = html_text.find(end_tag)
+print(html_text[start_index:end_index])</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Limitation of the find() method</h3>
+                    <ul>
+                        <li>Do you see the difference? We are not getting what we want now:</li>
+                    </ul>
+                    <div><pre class="solution-content python"><code>&lt;head&gt;&lt;meta http-equiv="Content-Type" content="text/html; charset=windows-1252"&gt;
+&lt;title &gt;Profile: Poseidon</code></pre></div>
+                    <ul>
+                        <li>This is because of the extra space before the closing "&gt;" in &lt;title &gt;</li>
+                        <li>The html is still rendered by the browser, but we cannot rely on it completely if we want to parse a web page </li>
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h3>Regular expressions</h3>
+                    <ul>
+                        <li>They are used to determine whether or not a text matches a particular pattern</li>
+                        <li>We can use them thanks to the <strong>re</strong> module in python</li>
+                        <li>They use special characters to represent patterns: ^, $, *, +, ., etc...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>re.findall() using *</h3>
+                    <ul>
+                        <li>The asterisk character <strong>*</strong> stands for "zero or more" of whatever came just before the asterisk</li>
+                        <li><strong>re.findall():</strong></li>
+                        <ul>
+                            <li>finds any text within a string that matches a given pattern i.e. regex</li>
+                            <li>takes 2 arguments, the 1st is the regex, the 2nd is the string to test</li>
+                            <li>returns a list of all matches</li>
+                        </ul>
+                    </ul>
+                    <p></p>
+                    <div><pre class="solution-content python"><code># re.findall(&lt;regular_expression&gt;, &lt;string_to_test&gt;)</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Interactive example</h3>
+                    <iframe src="https://trinket.io/embed/python/7c42a37566" width="100%" height="450" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </section>
+
+                <section>
+                    <h3>re.findall() case insensitive</h3>
+                    <ul>
+                        <li>Note that re.findall() is case sensitive</li>
+                        <div><pre class="solution-content python"><code>re.findall('ab*c', 'ABC') # nothing found</code></pre></div>
+                        <li>We can use a 3rd argument <strong>re.IGNORECASE</strong> to ignore the case</li>
+                        <div><pre class="solution-content python"><code>re.findall('ab*c', 'ABC', re.IGNORECASE) # ABC found</code></pre></div>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>re.findall() using . (period)</h3>
+                    <ul>
+                        <li>the period <strong>.</strong> stands for any single character in a regular expression</li>
+                        <li>for instance we could find all the strings that contains the letters "a" and "c" separated by a single character as follows:</li>
+                        <iframe src="https://trinket.io/embed/python/396b754ffd" width="100%" height="200" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>re.findall() using .* (period asterisk)</h3>
+                    <ul>
+                        <li>the term <strong>.*</strong> stands for any character being repeated any number of times</li>
+                        <li>for instance we could find all the string that starts with "a" and ends with "c", regardless of what is in between with:</li>
+                        <iframe src="https://trinket.io/embed/python/1bae467299" width="100%" height="200" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                    </ul>
+                    <!--
+import re
+print(re.findall('a.*c', 'abc'))
+print(re.findall('a.*c', 'abbc'))
+print(re.findall('a.*c', 'ac'))
+print(re.findall('a.*c', 'acc'))
+                    -->
+                </section>
+
+                <section>
+                    <h3>re.search()</h3>
+                    <ul>
+                        <li><strong>re.search():</strong></li>
+                        <ul>
+                            <li>searches for a particular pattern inside a string</li>
+                            <li>returns a MatchObject that stores different "groups" of data</li>
+                            <li>when we call the group() method on a MatchObject, we get the first and most inclusive result</li>
+                        </ul>
+                    </ul>
+                    <div><pre class="solution-content python"><code>import re
+match_results = re.search('ab*c', 'ABC', re.IGNORECASE)
+print(match_results.group())  # returns ABC</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>re.sub()</h3>
+                    <ul>
+                        <li>re.sub()</li>
+                        <ul>
+                            <li>allows to replace a text in a string that matches a pattern with a substitute (like the replace() string method)</li>
+                            <li>takes 3 arguments:</li>
+                            <ol>
+                                <li>regex</li>
+                                <li>replacement text</li>
+                                <li>string to parse</li>
+                            </ol>
+                        </ul>
+                    </ul>
+                    <div><pre class="solution-content python"><code>my_string = "This is very boring"
+print(my_string.replace('boring', 'funny'))
+import re
+print(re.sub('boring', 'WHAT?', my_string))</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>greedy regex (*)</h3>
+                    <ul>
+                        <li><strong>greedy</strong> expressions try to find the longest possible match when character like <strong>*</strong> are used</li>
+                        <li>for instance, in this example the regex finds everything between '&lt;' and  '&gt;' which is actually the whole <em>'&lt;replaced&gt; if it is in &lt;tags&gt'</em></li>
+                    </ul>
+                    <div><pre class="solution-content python"><code>my_string = 'Everything is &lt;replaced&gt; if it is in &lt;tags&gt;'
+my_string = re.sub('<.*>', 'BAR', my_string)
+print(my_string)  # 'Everything is BAR'</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>non-greedy regex (*?)</h3>
+                    <ul>
+                        <li><strong>*?</strong></li>
+                        <ul>
+                            <li>works the same as * BUT matches the shortest possible string of text</li>
+                        </ul>
+                    </ul>
+                    <div><pre class="solution-content python"><code>my_string = 'Everything is &lt;replaced&gt; if it is in &lt;tags&gt;'
+my_string = re.sub('<.*?>', 'BAR', my_string)
+print(my_string)  # 'Everything is BAR if it is in BAR'</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Use case: Using regex to parse a webpage</h3>
+                    <ul>
+                        <li><a href="http://mattchoplin.com/python_city/practice/Profile_Dionysus.htm">http://mattchoplin.com/python_city/practice/Profile_Dionysus.htm</a></li>
+                        <li>We want to extract the title:</li>
+                        <div><pre class="solution-content python"><code>&lt;TITLE &gt;Profile: Dionysus&lt;/title  / &gt;</code></pre></div>
+                        <li>We will use the regular expression for this case</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Use case: solution</h3>
+                    <div><pre class="solution-content python"><code>import re
+from urllib.request import urlopen
+my_address = "http://mattchoplin.com/python_city/practice/Profile_Dionysus.htm"
+html_page = urlopen(my_address)
+html_text = html_page.read().decode('utf-8')
+match_results = re.search("&lt;title .*?&gt;.*&lt;/title .*?&gt;", html_text, re.IGNORECASE)
+title = match_results.group()
+title = re.sub("&lt;. *&gt;", "", title)
+print(title)</code></pre></div>
+                </section>
+
+                <section>
+                    <h3></h3>
+                    <ul>
+                        <li></li>
                     </ul>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
@@ -147,9 +323,7 @@ print(html_text[start_index:end_index])</code></pre></div>
                     <h3></h3>
                     <ul>
                         <li></li>
-                        <li></li>
                     </ul>
-                    <p></p>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
 
@@ -157,9 +331,7 @@ print(html_text[start_index:end_index])</code></pre></div>
                     <h3></h3>
                     <ul>
                         <li></li>
-                        <li></li>
                     </ul>
-                    <p></p>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
 
@@ -167,9 +339,7 @@ print(html_text[start_index:end_index])</code></pre></div>
                     <h3></h3>
                     <ul>
                         <li></li>
-                        <li></li>
                     </ul>
-                    <p></p>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
 
@@ -177,9 +347,7 @@ print(html_text[start_index:end_index])</code></pre></div>
                     <h3></h3>
                     <ul>
                         <li></li>
-                        <li></li>
                     </ul>
-                    <p></p>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
 
@@ -187,9 +355,7 @@ print(html_text[start_index:end_index])</code></pre></div>
                     <h3></h3>
                     <ul>
                         <li></li>
-                        <li></li>
                     </ul>
-                    <p></p>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
 
@@ -197,9 +363,15 @@ print(html_text[start_index:end_index])</code></pre></div>
                     <h3></h3>
                     <ul>
                         <li></li>
+                    </ul>
+                    <div><pre class="solution-content python"><code></code></pre></div>
+                </section>
+
+                <section>
+                    <h3></h3>
+                    <ul>
                         <li></li>
                     </ul>
-                    <p></p>
                     <div><pre class="solution-content python"><code></code></pre></div>
                 </section>
 
