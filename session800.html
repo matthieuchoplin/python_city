@@ -1,0 +1,441 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Session 8</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+		<!-- Custom css -->
+        <link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+	<a href="index.html"><img border="0" alt="Courses" src="imgs/logo.png"></a>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Introduction to programming using Python</h2>
+					<h3>Session 8</h3>
+                    <p>Matthieu Choplin</p>
+                    <p><a href='mailto:matthieu.choplin1@city.ac.uk'>matthieu.choplin1@city.ac.uk</a></p>
+                    <p><a href='http://moodle.city.ac.uk/'>http://moodle.city.ac.uk/</a></p>
+				</section>
+				<section>
+					<h3>Objectives</h3>
+					<ul>
+                        <li>To develop a subclass from a superclass through inheritance</li>
+                        <li>To override methods in the subclass</li>
+                        <li>To understand encapsulation in Python</li>
+                        <li>To explore the object class and its methods</li>
+                        <li>To understand polymorphism and dynamic binding</li>
+                        <li>To determine if an object is an instance of a class using the isinstance function</li>
+                        <li>To discover relationships among classes</li>
+                        <li>To design classes using composition and inheritance relationships</li>
+					</ul>
+				</section>
+
+                <section>
+                    <h3>Definition</h3>
+                    <ul>
+                        <li>Inheritance enables you to define a general class (a superclass) and later extend it to more specialized classes (subclasses).</li>
+                        <li>Example: a class Rectangle and a class Circle.
+                            They share common attributes and methods such as the attribute color.</li>
+                        <li>Common attributes and methods can be put in a parent class.</li>
+                        <li>Using inheritance enables to <strong>avoid redundancy</strong></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>UML representation of inheritance</h3>
+                    <img src="imgs/uml_inheritance.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 450px"/>
+                </section>
+
+                <section>
+                    <h3>Superclasses and Subclasses</h3>
+                    <ul>
+                        <li>The syntax of inheritance is:</li>
+                        <div><pre class="solution-content python"><code>class Child(Parent):
+   # class body</code></pre></div>
+                        <li>If you want to call the method of the superclass, use super()</li>
+                        <li>In particular, call super().__init__() to get the superclass attributes accessible from the subclass</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>As an example, see the following programs:</h3>
+                    <ul>
+                        <li><a href="exercises/GeometricObject.py">GeometricObject.py</a></li>
+                        <li><a href="exercises/CircleDerivedFromGeometricObject.py">CircleDerivedFromGeometricObject.py</a></li>
+                        <li><a href="exercises/RectangleDerivedFromGeometricObject.py">RectangleDerivedFromGeometricObject.py</a></li>
+                        <li><a href="exercises/TestCircleRectangle.py">TestCircleRectangle.py</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Try to fix the program</h3>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;">class A:
+    def __init__(self, i = 0):
+        self.i = i
+
+class B(A):
+    def __init__(self, j = 0):
+        self.j = j
+
+def main():
+    b = B()
+    print(b.i)
+    print(b.j)
+main()</code></pre></div>
+                <div class="solution">
+                    <p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+                    <p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+                    <p class="solution-content python">Do not forget to call the __init__() method of the superclass</p>
+                </div>
+                </section>
+
+                <section>
+                    <h3>Overriding Methods</h3>
+                    <p>A subclass inherits methods from a superclass. Sometimes it is necessary for
+the subclass to modify the implementation of a method defined in the
+superclass. This is referred to as <strong>method overriding</strong>. </p>
+                    <div><pre class="solution-content python"><code>class Circle(GeometricObject):
+    # Other methods are omitted
+    # Override the __str__ method defined in GeometricObject
+    def __str__(self):
+        return super().__str__() + " radius: " + \
+            str(radius)</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>The object Class</h3>
+                    <ul>
+                    <li>Every class in Python is descended from the <strong>object</strong> class. If no inheritance is
+specified when a class is defined, the superclass of the class is object by
+default.</li>
+                    <img src="imgs/class_object_equivalent.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 200px"/>
+                    <li>There are more than a dozen methods defined in the object class. We
+discuss four methods __new__(), __init__(), __str__(), and __eq__(other)
+here.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>The __new__, __init__ Methods</h3>
+                    <ul>
+                        <li>All methods defined in the object class are special methods with two leading
+underscores and two trailing underscores.</li>
+                        <li>The __new__() method is automatically invoked when an object is
+constructed. This method then invokes the __init__() method to initialize the
+object. Normally you should only override the __init__() method to initialize
+the data fields defined in the new class.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>The __str__ Method</h3>
+                    <ul>
+                        <li>The __str__() method returns a string representation for the object. By
+default, it returns a string consisting of a class name of which the object is an
+instance and the object’s memory address in hexadecimal. </li>
+                    </ul>
+                    <div><pre class="solution-content python"><code> def __str__(self):
+    return "color: " + self.__color + \
+        " and filled: " + str(self.__filled) </code></pre></div>
+                </section>
+
+                <section>
+                    <h3>The __eq__ Method</h3>
+                    <ul>
+                        <li>The __eq__(other) method returns True if two objects are the same. By
+default, x.__eq__(y) (i.e., x == y) returns False, but x.__eq__(x) is True. You
+can override this method to return True if two objects have the same
+contents.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Override __eq__</h3>
+                    <iframe src="https://trinket.io/embed/python/316d7c332b" width="100%" height="500" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </section>
+
+                <section>
+                    <h3>Polymorphism</h3>
+                    <ul>
+                        <li>The inheritance relationship enables a subclass to inherit features from its
+superclass with additional new features.</li>
+                        <li>A subclass is a specialization of its superclass; every instance of a subclass is
+also an instance of its superclass, but not vice versa. For example, every circle is
+a geometric object, but not every geometric object is a circle. Therefore, you can
+always pass an instance of a subclass to a parameter of its superclass type. </li>
+                        <li style="font-size: 28px">Examples:</li>
+                        <ul style="font-size: 28px">
+                            <li><a href="exercises/PolymorphismDemo.py"> PolymorphismDemo.py</a> <a href="exercises/RectangleFromGeometricObject.py">RectangleFromGeometricObject.py</a> <a href="exercises/CircleFromGeometricObject.py">CircleFromGeometricObject.py</a>
+                            </li>
+                            <li><a href="exercises/Animals.py">Animals.py</a></li>
+                        </ul>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Dynamic Binding</h3>
+                    <p style="font-size: 28px">Dynamic binding works as follows: Suppose an object o is an instance of classes
+C1, C2, ..., Cn-1, and Cn, where C1 is a subclass of C2, C2 is a subclass of C3, ...,
+and Cn-1 is a subclass of Cn. That is, Cn is the most general class, and C1 is the
+most specific class. In Python, Cn is the object class. If o invokes a method p,
+Python searches the implementation for the method p in C1, C2, ..., Cn-1 and Cn,
+in this order, until it is found. Once an implementation is found, the search stops
+and <strong>the first-found implementation is invoked</strong>.</p>
+                    <img src="imgs/dynamic_binding.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 200px"/>
+                </section>
+
+                <section>
+                    <h3>Dynamic Binding: example</h3>
+                    <iframe src="https://trinket.io/embed/python/bc60dae9b4" width="100%" height="500" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </section>
+
+                <section>
+                    <h3>The isinstance Function</h3>
+                    <ul>
+                        <li>The isinstance function can be used to determine if an object is an instance of a class.</li>
+                        <li>See the example program <a href="exercises/IsinstanceDemo.py">IsinstanceDemo.py</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>isinstance() compared to type()</h3>
+                    <ul>
+                        <li>isinstance take into account inheritance, an instance of a derived class is an instance of a base class too</li>
+                        <iframe src="https://trinket.io/embed/python/afa0e77ed6" width="100%" height="300" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                    <!--
+                        <div><pre class="solution-content python"><code >class Vehicle: pass
+class Truck(Vehicle): pass
+isinstance(Vehicle(), Vehicle) # returns True
+type(Vehicle()) == Vehicle # returns True
+isinstance(Truck(), Vehicle) # returns True
+type(Truck()) == Vehicle # returns False</code></pre></div>
+-->
+                        <li>NB: the instance are created on the fly here, we do not pass them to a variable</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>The hierarchy of the type of Exceptions</h3>
+                    <p>You can find the full hierarchy on <a target="_blank" href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></p>
+                    <img src="imgs/exceptions_hierarchy.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 350px"/>
+                </section>
+
+                <section>
+                    <h3>Defining Custom Exception Classes</h3>
+                    <p>See how we inherit from <em>RunTimeError</em> in the class InvalidRadiusException in
+the example <a href="exercises/CircleWithCustomException.py">CircleWithCustomException.py</a> and how we use it in <a href="exercises/TestCircleRectangle.py">TestCircleWithCustomException.py</a></p>
+                </section>
+
+                <section>
+                    <h3>Encapsulation</h3>
+                    <ul>
+                        <li>The syntax we have seen so far for data encapsulation is to use 2 underscore in
+front of the attribute we want to hide, which forces us to use getter and setter to
+access and modify the field.</li>
+                    </ul>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">class C:
+    def __init__(self,x):
+        self.__x = x
+
+    def getX(self):
+        return self.__x
+
+    def setX(self, x):
+        self.__x = x</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Encapsulation and data mangling</h3>
+                    <ul style="font-size: 26px">
+                        <li>The use of double leading underscores causes the name to be <strong>mangled</strong> to
+something else. Specifically, the private attributes in the preceding class get
+renamed to _C__x. At this point, you might ask what purpose such name
+mangling serves. The answer is inheritance - such attributes cannot be overridden
+via inheritance. For example:</li>
+                    </ul>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 24px;">class C:
+    def __init__(self,x):
+        self.__x = x
+
+class A(C):
+    def __init__(self):
+        super().__init__(2)
+        # Does not override C.__x
+        self.__x = 1
+
+a = A()
+print(a._A__x)
+print(a._C__x)
+</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Encapsulation in a more pythonic way</h3>
+                    <ul>
+                        <li>We can use <strong>property</strong> to customize access to an attribute</li>
+                    </ul>
+                    <div><pre class="solution-content python"><code data-trim data-noescape style="line-height: 100%;font-size: 24px;">class C:
+    def __init__(self,x):
+        <mark>self.setX(x)</mark>
+
+    def getX(self):
+        return self.__x
+
+    def setX(self, x):
+        if x < 0:
+            self.__x = 0
+        elif x > 1000:
+            self.__x = 1000
+        else:
+            self.__x = x
+
+    <mark>x = property(getX, setX)</mark></code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Equivalent using decorators</h3>
+
+                    <div><pre class="solution-content python"><code data-trim data-noescape  style="line-height: 100%;font-size: 24px;">class P:
+    def __init__(self,x):
+        <mark>self.x = x</mark>
+
+    <mark>@property</mark>
+    def x(self):
+        return self.__x
+
+    <mark>@x.setter</mark>
+    def x(self, x):
+        if x < 0:
+            self.__x = 0
+        elif x > 1000:
+            self.__x = 1000
+        else:
+            self.__x = x</code></pre></div>
+                        <p>Properties should only be
+used in cases where you
+actually need to perform extra
+processing on attribute access</p>
+                </section>
+
+                <section>
+                    <h3>Relationships among Classes</h3>
+                    <ul>
+                        <li>Association</li>
+                        <li>Aggregation</li>
+                        <li>Composition</li>
+                        <li>Inheritance</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Association</h3>
+                    <ul>
+                        <li>Association represents a general binary relationship that describes an activity
+between two classes.</li>
+                        <img src="imgs/association.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 280px"/>
+                        <li>The association relations are implemented using data fields and methods in
+classes.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Aggregation and Composition</h3>
+                    <ul>
+                        <li>Aggregation is a special form of association, which represents an ownership
+relationship between two classes. Aggregation models the has-a relationship. If
+an object is exclusively owned by an aggregated object, the relationship
+between the object and its aggregated object is referred to as composition. </li>
+                        <img src="imgs/aggregation_composition.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 250px"/>
+                        <li>An aggregation relationship is usually represented as a data field in the
+aggregated class.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Aggregation Between Same Class objects</h3>
+                    <ul>
+                        <li>Aggregation may exist between objects of the same class. For example, a person
+may have a supervisor. </li>
+                        <img src="imgs/self_aggregation.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 180px"/>
+                        <div><pre class="solution-content python"><code data-trim data-noescape  style="line-height: 100%;font-size: 24px;">class Person:
+    def __init__(self,supervisor):
+        self.supervisor = supervisor</code></pre></div>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>is-a relationship vs has-a relationship</h3>
+                    <ul>
+                        <li>Inheritance is for the <strong>is-a</strong> relationship</li>
+                        <li>Composition and aggregation is for the <strong>has-a</strong> relationship</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Multiple inheritance</h3>
+                    <ul>
+                        <li>Syntax for multiple inheritance:</li>
+                        <div><pre class="solution-content python"><code data-trim data-noescape  style="line-height: 100%;font-size: 24px;">class Child(ParentA, ParentB):
+    # rest of the class</code></pre></div>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>The Course Class</h3>
+                    <ul>
+                        <img src="imgs/course_class.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 350px"/>
+                        <li>See the programs:
+                            <ul>
+                                <li><a href="exercises/TestCourse.py">TestCourse.py</a> to see how it is used</li>
+                                <li><a href="exercises/Course.py">Course.py</a> to see how it is implemented</li>
+                             </ul>
+                    </ul>
+                </section>
+
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				slideNumber: true,
+				center: false,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/menu/menu.js' },
+					{ src: 'plugin/jquery-2.0.0.min.js' },
+					{ src: 'plugin/custom.js' },
+					{ src: 'plugin/clipboard.min.js' },
+
+				]
+			});
+		</script>
+	</body>
+</html>

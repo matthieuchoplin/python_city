@@ -458,8 +458,10 @@ Favorite Color: Wine
                         <li>Access the HTML content with the <em>soup</em> attribute</li>
                         <div><pre class="solution-content python"><code>import mechanicalsoup
 
-my_browser = mechanicalsoup.Browser(soup_config={'features':'html.parser'})
-page = my_browser.get("http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm")
+my_browser = mechanicalsoup.Browser(
+                 soup_config={'features':'html.parser'})
+page = my_browser.get("http://mattchoplin.com/python_city/" \
+           "practice/Profile_Aphrodite.htm")
 print(page.soup)</code></pre></div>
 
                     </ul>
@@ -479,10 +481,15 @@ print(page.soup)</code></pre></div>
                 </section>
 
                 <section>
-                    <h3></h3>
+                    <h3>MechanicalSoup: script to login</h3>
                     <ul>
                         <li></li>
                     </ul>
+                    <div><pre class="solution-content python"><code>import mechanicalsoup
+
+my_browser = mechanicalsoup.Browser(soup_config={'features':'html.parser'})
+page = my_browser.get("http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm")
+</code></pre></div>
 
                 </section>
 
