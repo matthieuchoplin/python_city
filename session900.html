@@ -43,7 +43,8 @@
                         <li>Regular expressions</li>
                         <li>Installing external libraries</li>
                         <li>Using a web parser: BeautifulSoup</li>
-                        <li>Emulating a web browser: MechanicalSoup</li>
+                        <li>Submitting data to a form using MechanicalSoup</li>
+                        <li>Fetching data in real time</li>
 					</ul>
 				</section>
 
@@ -330,9 +331,9 @@ print(title)</code></pre></div>
                     <h3>Installing an external library</h3>
                     <ul>
                         <li>Sometimes what you need is not included in the python standard library and you have to install an external library</li>
-                        <li>You are going to use a python package manager: <strong><a href="https://pip.pypa.io/en/latest/installing/">pip</a></strong></li>
-                        <li>The packages (libraries) that you can install with pip are listed on <a href="https://pypi.python.org/pypi">https://pypi.python.org/pypi</a></li>
-                        <li>If you do not have pip, you can use the command "python setup.py install" from the package you would have downloaded and uncompressed from <a href="https://pypi.python.org/pypi">pypi</a></li>
+                        <li>You are going to use a python package manager: <strong><a target="_blank" href="https://pip.pypa.io/en/latest/installing/">pip</a></strong></li>
+                        <li>The packages (libraries) that you can install with pip are listed on <a target="_blank" href="https://pypi.python.org/pypi">https://pypi.python.org/pypi</a></li>
+                        <li>If you do not have pip, you can use the command "python setup.py install" from the package you would have downloaded and uncompressed from <a target="_blank" href="https://pypi.python.org/pypi">pypi</a></li>
                     </ul>
                 </section>
 
@@ -428,13 +429,59 @@ Favorite Color: Wine
                     </ul>
 
                 </section>
+                <section>
+                    <h3>The select method (1)</h3>
+                    <ul>
+                        <li>... will return a list of Tag objects, which is how Beautiful Soup represents an HTML element. The list will
+                        contain one Tag object for every match in the BeautifulSoup object's HTML</li>
+
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>The select method (2)</h3>
+                    <table style="font-size: 24px">
+						<tr>
+							<th style="width: 30%;">Selector passed to the select method</th>
+							<th>Will match...</th>
+						</tr>
+						<tr>
+							<td>soup.select('div')</td>
+							<td>All elements named &lt;div&gt;</td>
+						</tr>
+						<tr>
+							<td>soup.select('#author')</td>
+							<td>The element with an <strong>id</strong> attribute of <strong>author</strong></td>
+						</tr>
+						<tr>
+							<td>soup.select('.notice')</td>
+							<td>All elements that use a CSS</td>
+						</tr>
+						<tr>
+							<td>soup.select('div span')</td>
+							<td>All elements named &lt;span&gt; that are within an element named &lt;div&gt;</td>
+						</tr>
+						<tr>
+							<td>soup.select('div > span')</td>
+							<td>All elements named &lt;span&gt; that are directly within an element named &lt;div&gt;, with no other elements in between</td>
+						</tr>
+						<tr>
+							<td>soup.select('input[name]')</td>
+							<td>All elements named &lt;input&gt; that have a <strong>name</strong> attribute with any value</td>
+						</tr>
+						<tr>
+							<td>soup.select('input[type="button"]')</td>
+							<td>All elements named &lt;input&gt; that have an attribute name <strong>type</strong> with value <strong>button</strong></td>
+						</tr>
+					</table>
+                </section>
 
                 <section>
                     <h3>Emulating a web browser</h3>
                     <ul>
                         <li>Sometimes we need to submit information to a web page, like a login page</li>
                         <li>We need a web browser for that</li>
-                        <li><strong><a href="https://github.com/hickford/MechanicalSoup">MechanicalSoup</a></strong> is an alternative to urllib that can do all the same things but has more added
+                        <li><strong><a target="_blank" href="https://github.com/hickford/MechanicalSoup">MechanicalSoup</a></strong> is an alternative to urllib that can do all the same things but has more added
                             functionality that will allow us to talk back to webpages without using a standalone browser,
                             perfect for fetching web pages, clicking on buttons and links, and filling out and submitting forms</li>
                     </ul>
@@ -471,10 +518,10 @@ print(page.soup)</code></pre></div>
                 <section>
                     <h3>MechanicalSoup: Submitting values to a form</h3>
                     <ul>
-                        <li>Have a look at this <a href="http://mattchoplin.com/python_city/practice/LogIn.htm">login page</a></li>
+                        <li>Have a look at this <a target="_blank" href="https://whispering-reef-69172.herokuapp.com/login">login page</a></li>
                         <li>The important section is the login form</li>
                         <li>We can see that there is a submission &lt;form&gt; named "login" that includes two &lt;input&gt; tags, one named
-                            <em>id</em> and the other one named <em>pass</em>.</li>
+                            <em>username</em> and the other one named <em>password</em>.</li>
                         <li>The third &lt;input&gt; is the actual "Submit" button</li>
                     </ul>
 
@@ -482,15 +529,127 @@ print(page.soup)</code></pre></div>
 
                 <section>
                     <h3>MechanicalSoup: script to login</h3>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">import mechanicalsoup
+
+my_browser = mechanicalsoup.Browser(
+    soup_config={'features':'html.parser'})
+login_page = my_browser.get(
+    "https://whispering-reef-69172.herokuapp.com/login")
+login_html = login_page.soup
+
+form = login_html.select("form")[0]
+form.select("input")[0]["value"] = "admin"
+form.select("input")[1]["value"] = "default"
+
+profiles_page = my_browser.submit(form, login_page.url)
+print(profiles_page.url)
+print(profiles_page.soup)</code></pre></div>
+
+                </section>
+
+                <section>
+                    <h3>Methods in MechanicalSoup</h3>
                     <ul>
-                        <li></li>
+                        <li>We created a Browser object</li>
+                        <li>We called the method <em>get</em> on the Browser object to get a web page</li>
+                        <li>We used the <em>select()</em> method to grab the form and input values in it</li>
                     </ul>
-                    <div><pre class="solution-content python"><code>import mechanicalsoup
+                </section>
 
-my_browser = mechanicalsoup.Browser(soup_config={'features':'html.parser'})
-page = my_browser.get("http://mattchoplin.com/python_city/practice/Profile_Aphrodite.htm")
-</code></pre></div>
+                <section>
+                    <h3>Interacting with the Web in Real Time</h3>
+                    <ul>
+                        <li>We want to get data from a website that is constantly updated</li>
+                        <li>We actually want to simulate clicking on the "refresh" button</li>
+                        <li>We can do that with the <em>get</em> method of MechanicalSoup</li>
+                    </ul>
+                </section>
 
+                <section>
+                    <h3>Use case: fetching the stock quote from Yahoo finance (1)</h3>
+                    <ul>
+                        <li>Let us identify what is needed</li>
+                        <ul>
+                            <li>What is the source of the data? <br/><strong><a href="http://finance.yahoo.com/q?s=yhoo">http://finance.yahoo.com/q?s=yhoo</a></strong></li>
+
+                            <li>What do we want to extract from this source? <br/><strong>The stock price</strong></li>
+
+                        </ul>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Use case: fetching the stock quote from Yahoo finance (2)</h3>
+
+                    <ul>
+                        <li>If we look at the source code, we can see what is the tag for the stock and how to retrieve it:</li>
+                        <li><div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">&lt;span class="time_rtq_ticker"&gt;
+    &lt;span id="yfs_l84_yhoo"&gt;40.01&lt;&#47;span&gt;
+&lt;&#47;span&gt;</code></pre></div></li>
+                        <li>We check that &lt;span id="yfs_l84_yhoo"&gt; only appears once in the webpage since
+                            it will be a way to identify the location of the current price</li>
+
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h3>MechanicalSoup: script to find Yahoo current price</h3>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">import mechanicalsoup
+
+my_browser = mechanicalsoup.Browser()
+page = my_browser.get("http://finance.yahoo.com/q?s=yhoo")
+html_text = page.soup
+# return a list of all the tags where
+# the id is 'yfs_184_yhoo'
+my_tags = html_text.select("#yfs_l84_yhoo")
+# take the BeautifulSoup string out of the
+# first (and only) &lt;span&gt; tag
+my_price = my_tags[0].text
+print("The current price of "
+      "YHOO is: {}".format(my_price))</code></pre></div>
+
+                </section>
+
+                <section>
+                    <h3>Repeatedly get the Yahoo current price</h3>
+                    <ul>
+                        <li>Now that we know how to get the price of a stock from the Yahoo web page, we can create a for loop to stay up to date</li>
+                        <li>Note that we should not overload the Yahoo website with more requests than we need. And also, we should also have a look at their
+                            <a href="https://policies.yahoo.com/us/en/yahoo/terms/utos/index.htm">Terms of use</a> to be sure that what we do is allowed</li>
+                        <li>The terms state that we should not "use the Yahoo! Finance Modules in a manner that exceeds reasonable request volume [or]
+                            constitutes excessive or abusive usage,"</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Introduction to the <em>time.sleep()</em> method</h3>
+                    <ul>
+                        <li>The <em>sleep()</em> method of the module time takes a number of seconds as argument
+                            and waits for this number of seconds, it enables to delay the execution of a statement in the program</li>
+                    </ul>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">from time import sleep
+print "I'm about to wait for five seconds..."
+sleep(5)
+print "Done waiting!"</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Repeatedly get the Yahoo current price: script</h3>
+                    <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 24px;">from time import sleep
+import mechanicalsoup
+my_browser = mechanicalsoup.Browser()
+# obtain 1 stock quote per minute for the next 3 minutes
+for i in range(0, 3):
+    page = my_browser.get("http://finance.yahoo.com/q?s=yhoo")
+    html_text = page.soup
+    # return a list of all the tags where the id is 'yfs_184_yhoo'
+    my_tags = html_text.select("#yfs_l84_yhoo")
+    # take the BeautifulSoup string out of the first tag
+    my_price = my_tags[0].text
+    print("The current price of YHOO is: {}".format(my_price))
+    if i<2: # wait a minute if this isn't the last request
+        sleep(60)</code></pre></div>
                 </section>
 
 			</div>
