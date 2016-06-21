@@ -438,7 +438,7 @@ Favorite Color: Wine
                     </ul>
                 </section>
 
-                <section>
+                <section id="beautifulsoup-select">
                     <h3>The select method (2)</h3>
                     <table style="font-size: 24px">
 						<tr>
@@ -569,12 +569,14 @@ print(profiles_page.soup)</code></pre></div>
                     <h3>Use case: fetching the stock quote from Yahoo finance (1)</h3>
                     <ul>
                         <li>Let us identify what is needed</li>
+                        <li>
                         <ul>
                             <li>What is the source of the data? <br/><strong><a href="http://finance.yahoo.com/q?s=yhoo">http://finance.yahoo.com/q?s=yhoo</a></strong></li>
 
                             <li>What do we want to extract from this source? <br/><strong>The stock price</strong></li>
 
                         </ul>
+                        </li>
                     </ul>
                 </section>
 
@@ -650,6 +652,39 @@ for i in range(0, 3):
     print("The current price of YHOO is: {}".format(my_price))
     if i<2: # wait a minute if this isn't the last request
         sleep(60)</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Exercise: putting it all together</h3>
+                    <ul>
+                        <li>Install a new library called <em>requests</em></li>
+                        <li>Using <a href="#/beautifulsoup-select">the select method</a> of BeautifulSoup, parse (that
+                            is, analyze and identify the parts of) the image of the day of <a href="http://xkcd.com/">http://xkcd.com/</a></li>
+                        <li>Using the <em>get</em> method of the <em>requests</em> library, download the image</li>
+                        <li>Complete the following program <a href="exercises/xkcd_incomplete.py">xkcd_incomplete.py</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Using request</h3>
+                    <ul>
+                        <li>You first have to import it</li>
+                        <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 24px;">import requests</code></pre></div>
+                        <li>If you want to download the webpage, use the get() method with a url in parameter, such as:</li>
+                        <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 24px;">res = requests.get(url)</code></pre></div>
+                        <li>Stop your program if there is an error with the raise_for_status() method</li>
+                        <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 24px;">res.raise_for_status()</code></pre></div>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Next? Web crawling!</h3>
+                    <ul>
+                        <li>From Wikipedia: A Web crawler is an Internet bot which systematically browses the World Wide Web, typically for the purpose of Web indexing.</li>
+                        <li>How do you navigate a website? For example, for the <a href="http://xkcd.com/">http://xkcd.com/</a> website, how could you <strong>retrieve all of its images?</strong></li>
+                        <li>Write down how you would design your program</li>
+                        <li>Write the program</li>
+                    </ul>
                 </section>
 
 			</div>
