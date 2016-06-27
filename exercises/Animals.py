@@ -17,7 +17,7 @@ animals = [Cat('Missy'),
            Dog('Lassie')]
 
 for animal in animals:
-    print animal.name + ': ' + animal.talk()
+    print(animal.name + ': ' + animal.talk())
 
 # prints the following:
 #

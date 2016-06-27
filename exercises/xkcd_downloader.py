@@ -4,7 +4,7 @@ url = 'http://xkcd.com'              # starting url
 os.makedirs('xkcd', exist_ok=True)   # store comics in ./xkcd
 # while not url.endswith('#'):
 counter = 0
-while counter < 3:
+while counter < 3:  # change the counter to say how many images you want
 
     # Download the page.
     print('Downloading page %s...' % url)
