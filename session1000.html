@@ -40,6 +40,7 @@
 					<ul>
 						<li>Debugging</li>
 						<li>Testing</li>
+						<li>Exercise on OOP and Inheritance</li>
 						<li>Introduction to Database Connection</li>
 					</ul>
 				</section>
@@ -71,11 +72,11 @@
 
                 <section>
                     <h3>Commands for using pdb</h3>
-                    <ul>
-                        <li>list (l) List 11 lines around the current line (five before and five after). Using list with a single numerical argument lists 11 lines around that line instead of the current line.</li>
-                        <li>next (n) Execute the next line in the file. This allows you to go line by line and inspect the state of the code at that point.</li>
-                        <li>continue (c) Exit out of the debugger but still execute the code.</li>
-						<li>step into (s) to go into the execution call of an other function</li>
+                    <ul style="line-height: 100%;">
+                        <li>list (<strong>l</strong>) List 11 lines around the current line (five before and five after). Using list with a single numerical argument lists 11 lines around that line instead of the current line.</li>
+                        <li>next (<strong>n</strong>) Execute the next line in the file. This allows you to go line by line and inspect the state of the code at that point.</li>
+                        <li>continue (<strong>c</strong>) Exit out of the debugger but still execute the code.</li>
+						<li>step into (<strong>s</strong>) to go into the execution call of an other function</li>
                     </ul>
 					<p>To go further: <a href="https://pymotw.com/3/pdb/">https://pymotw.com/3/pdb/</a> </p>
                 </section>
@@ -161,13 +162,13 @@ if __name__ == '__main__':
 
 				<section>
 					<h3>Exercise: Create a test</h3>
-					<p>Create a test for the sort_list() of the 1st exercise</p>
+					<p>Create a test for the sort_list() function of the 1st exercise</p>
 					<ol style="line-height: 100%;">
 						<li>Create an appropriate test file</li>
 						<li>Import the <strong>unittest</strong> library</li>
 						<li>Import the <a href="exercises/sorting_list.py">file</a> where the sort_list() function is defined</li>
 						<li>Create a class inheriting from <strong>unittest.TestCase</strong> with an appropriate name</li>
-						<li>Create a function that is going to test the sort_list() function with an <strong>assert</strong> method</li>
+						<li>Create a function that is going to test the sort_list() function with an <a href="https://docs.python.org/3/library/unittest.html#assert-methods"><strong>assert</strong> method</a></li>
 						<li>At the end of the test file, write the following:</li>
 						<div><pre class="solution-content python"><code>if __name__ == '__main__':
     unittest.main()</code></pre></div>
@@ -185,12 +186,78 @@ if __name__ == '__main__':
 				</section>
 
 				<section>
+					<h3>Measuring your code coverage</h3>
+					<p>You can use the module <a href="https://pypi.python.org/pypi/coverage">coverage</a></p>
+					<ul>
+						<li>Use <strong>coverage run</strong> to run your program and gather data:</li>
+						<div><pre class="solution-content python"><code>$ coverage run my_program.py arg1 arg2</code></pre></div>
+						<li>Use <strong>coverage report</strong> to report on the results:</li>
+						<div><pre class="solution-content python"><code>$ coverage report -m</code></pre></div>
+						<li>Also possible <a href="https://www.jetbrains.com/help/pycharm/2016.1/running-with-coverage.html">in Pycharm</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Exercises on Inheritance and OOP</h3>
+					<ul>
+						<li>The Account class</li>
+						<li>Game: ATM Machine</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Exercise: The Account class (1)</h3>
+					<p style="line-height: 100%; font-size: 28px;">Design a class named Account that contains:</p>
+					<ul style="line-height: 100%; font-size: 28px;">
+						<li> A private int data field named id for the account.</li>
+						<li> A private float data field named balance for the account.</li>
+						<li> A private float data field named annualInterestRate that stores the current
+						interest rate.</li>
+						<li> A constructor that creates an account with the specified id (default 0), initial
+						balance (default 100), and annual interest rate (default 0).</li>
+						<li> The accessor and mutator methods for id, balance, and annualInterestRate.</li>
+						<li> A method named getMonthlyInterestRate() that returns the monthly
+						interest rate.</li>
+						<li> A method named getMonthlyInterest() that returns the monthly interest.</li>
+						<li> A method named withdraw that withdraws a specified amount from the
+						account.</li>
+						<li> A method named deposit that deposits a specified amount to the account.</li>
+					</ul>
+					<p style="line-height: 100%; font-size: 28px;"	>NB: for making fields private, use <a href="session700.html#/18">this</a>, remember that you can also use
+					<a href="session800.html#/23">properties</a></p>
+				</section>
+
+				<section>
+					<h3>Exercise: The Account class (2)</h3>
+					<p style="line-height: 100%; font-size: 29px;">Draw the UML diagram for the class, and then implement the class. (Hint: The method
+	getMonthlyInterest() is to return the monthly interest amount, not the interest rate.
+	Use this formula to calculate the monthly interest: balance * monthlyInterestRate.</p>
+	<p style="line-height: 100%; font-size: 29px;">monthlyInterestRate is annualInterestRate / 12. Note that annualInterestRate is a
+	percent (like 4.5%). You need to divide it by 100.)</p>
+<p style="line-height: 100%; font-size: 29px;">Write a test program that creates an Account object with an account id of 1122, a
+	balance of £20,000, and an annual interest rate of 4.5%. Use the withdraw method to
+	withdraw £2,500, use the deposit method to deposit £3,000, and print the id, balance,
+	monthly interest rate, and monthly interest.</p>
+				</section>
+
+				<section>
+					<h3>Exercise on Inheritance and OOP</h3>
+					<p>Use the Account class created in the previous exercise to simulate an ATM machine.
+						Create ten accounts in a list with the ids 0, 1, ..., 9, and an initial balance of £100.
+						The system prompts the user to enter an id. If the id is entered incorrectly, ask the user
+						to enter a correct id. Once an id is accepted, the main menu is displayed as shown in the
+						sample run. You can enter a choice of 1 for viewing the current balance, 2 for withdrawing money,
+						3 for depositing money, and 4 for exiting the main menu. Once you exit, the system will prompt
+						for an id again. So, once the system starts, it won't stop.</p>
+				</section>
+
+				<section>
 					<h3>Introduction to SQL Database Connection (1)</h3>
 					<ul>
 						<li>You will use databases when you want to structure your data using tables and fields and
 							<strong>persist them in memory</strong>.</li>
 						<li>The data stored in database will remain even if you close your program.</li>
-						<li>You can visualize what a database is by taking a Spreadsheet where the file will be the table, the header of the rows will
+						<li>You can visualize what a database is by comparing it to a spreadsheet where the file will be the table, the header of the rows will
 							be the fields or columns and the rest of the rows will be the data stored in this table</li>
 						<li>The simplest version of SQL is SQLite, we can interact with it through the module <strong>sqlite3</strong></li>
 					</ul>
@@ -307,7 +374,7 @@ with sqlite3.connect("test_database.db") as connection:
 					<h3>Exercise</h3>
 					<ul>
 						<li>Populate the database with additional records</li>
-						<li>Display the People who are older than 18 using a select command and a cr.fetchall()</li>
+						<li>Display the People who are older than 18 using a <a href="http://www.w3schools.com/sql/sql_where.asp">select command</a> and a cr.fetchall()</li>
 					</ul>
 				</section>
 
@@ -322,6 +389,18 @@ with sqlite3.connect("test_database.db") as connection:
 					<p>You can host your project on Github or Bitbucket and
 						<a href="https://try.github.io/levels/1/challenges/1">learn the git command</a> </p>
 				</section>
+
+				<section>
+					<h3>Solution OOP</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<p class="solution-content python"> See the file <a href="exercises/oop_account.py">oop_account.py</a>and
+<a href="exercises/oop_atm.py"> oop_atm.py</a></p>
+						<p>You can write a better program 😁	</p>
+					</div>
+				</section>
+
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
