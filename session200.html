@@ -365,17 +365,24 @@ print("The area of the squared room of length", \
 					<div class="solution">
 						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
 						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
-<pre class="solution-content python" style="margin-bottom: 0px; font-size: 22px;"><code># Enter the investment amount
-finalAccountValue = float(input("Enter final account value: "))
-# Enter yearly interest rate
-annualInterestRate = float(input("Enter annual interest rate in percent, for example 8.25: "))
-# Obtain monthly interest rate
+<pre class="solution-content python" style="margin-bottom: 0px; font-size: 22px;line-height: 100%;"><code># Enter yearly interest rate
+annualInterestRate = float(input(
+  "Enter annual interest rate, e.g., 8.25: "))
 monthlyInterestRate = annualInterestRate / 1200
 # Enter number of years
-numOfYears = eval(input("Enter number of years as an integer, \nfor example 5: "))
-initialDepositValue = finalAccountValue / (1 + monthlyInterestRate) ** (numOfYears * 12)
-print("Initial deposit value is", initialDepositValue)
-</code></pre>
+numberOfYears = float(input(
+  "Enter number of years as an integer, e.g., 5: "))
+# Enter loan amount
+loanAmount = float(input("Enter loan amount, e.g., 120000.95: "))
+# Calculate payment
+monthlyPayment = loanAmount * monthlyInterestRate / (1
+  - 1 / (1 + monthlyInterestRate) ** (numberOfYears * 12))
+totalPayment = monthlyPayment * numberOfYears * 12
+
+# Display results
+print("The monthly payment is " +
+  str(int(monthlyPayment * 100) / 100))
+print("The total payment is " + str(int(totalPayment * 100) /100))</code></pre>
 					</div>
 				</section>
 				<section>
@@ -428,8 +435,7 @@ print("first_string is", first_string,
 					  </tr>
 					</table>
 					<p>Get the first element of the sequence:</p>
-					<pre class="solution-content python" ><code>
-my_string_variable = "abracadabra"
+					<pre class="solution-content python" ><code>my_string_variable = "abracadabra"
 first_elem = my_string_variable[0]</code></pre>
 				</section>
 				<section>
