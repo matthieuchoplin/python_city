@@ -324,6 +324,36 @@ for year in range(2001, 2100 + 1):
 					</div>
 				</section>
 
+                <section>
+                    <h3>Exercise Bonus: find if a string is a Palindrome</h3>
+                    <p>A string is a palindrome if it is identical forward and backward. For example “anna”,
+“civic”, “level” and “hannah” are all examples of palindromic words. Write a program
+that reads a string from the user and uses a loop to determines whether or not it is a
+palindrome. Display the result, including a meaningful output message.</p>
+                </section>
+
+                <section>
+                    <h3>Solution: Palindrome</h3>
+                    <div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<pre class="solution-content python"><code data-trim data-noescape>line = input('Enter a string: ')
+
+is_palindrome = True
+
+for i in range(0, len(line) // 2):
+    if line[i] != line[len(line) - 1 - i]:
+        is_palindrome = False
+        break
+
+if is_palindrome:
+    print(line, "is a palindrome")
+else:
+    print(line, "is not a palindrome")
+</code></pre>
+					</div>
+                </section>
+
 				<section>
                     <h3>Bonus Exercise: Caesar Cipher</h3>
 <p>The idea behind this cipher is simple. Each letter in the original message is
