@@ -323,6 +323,45 @@ for year in range(2001, 2100 + 1):
 </code></pre>
 					</div>
 				</section>
+
+				<section>
+                    <h3>Bonus Exercise: Caesar Cipher</h3>
+<p>The idea behind this cipher is simple. Each letter in the original message is
+shifted by 3 places. As a result, A becomes D, B becomes E, C becomes F, D
+becomes G, etc. The last three letters in the alphabet are wrapped around to the
+beginning: X becomes A, Y becomes B and Z becomes C. Non-letter characters are
+not modified by the cipher.</p>
+<p>Write a program that implements a Caesar cipher. Allow the user to supply the
+message and the shift amount, and then display the shifted message. Your program should
+also support negative shift values so that it can be used both to encode messages and
+decode messages.</p>
+				</section>
+				<section>
+                    <h3>Solution: Caesar Cipher, Ciphering</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+<p class="solution-content ">Download this file: <a href="exercises/caesar_cipher.py">caesar_cipher.py</a> (right click and save as)</p>
+					</div>
+				</section>
+
+				<section>
+                    <h3>Solution: Caesar Cipher, Deciphering</h3>
+					<div class="solution">
+						<p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Show solution</p>
+						<p class="hide-solution"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+						<p class="solution-content ">Download this file: <a href="exercises/caesar_decipher.py">caesar_decipher.py</a> (right click and save as)</p>
+					</div>
+				</section>
+
+				<section>
+                    <h3>Exercise: Refactoring Caesar Cipher</h3>
+					<p>At this point we have one script for ciphering and an other for deciphering a message.</p>
+					<p>But we can notice that the scripts are very similar, and parts of the code are repeated.</p>
+					<p>We do not want that in programming, we want to try to respect the <string>DRY</string> principle (Don't Repeat Yourself)</p>
+					<p>Refactor the 2 previous scripts to make it one so that when we run it, we ask the user if he wants to cipher or decipher the entered message</p>
+				</section>
+
 				<section>
 					<h3>Sequences: check point</h3>
 					<ul>
