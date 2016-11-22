@@ -416,9 +416,22 @@ print(deserialized_data)
                 </section>
 
                 <section>
-                    <h3>Example with a simple rest API</h3>
-                    <p>The website <a href="https://restcountries.eu/">https://restcountries.eu/</a> has a json API for getting information about countries (capital, population...)</p>
-                    <p>Using <strong>urllib</strong> and <strong>json</strong> libraries, let us retrieve the capitals of each country</p>
+                    <h3>Example with a simple rest API (1)</h3>
+                     <p>How to get the capital of each country?</p>
+                    <pre class="solution-content python"><code data-trim data-noescape>import json
+from urllib import request
+
+infile = request.urlopen(
+    'https://restcountries.eu/rest/v1/all')
+content_as_python_obj = json.loads(infile.read().decode())
+for country in content_as_python_obj:
+    print(country['borders'])</code></pre>
+                    <p>Can you see what object is the "borders"?</p>
+
+                </section>
+
+                <section>
+                    <h3>Example with a simple rest API (2)</h3>
                     <pre class="solution-content python"><code data-trim data-noescape>import json
 from urllib import request
 
