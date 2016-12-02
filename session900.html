@@ -571,7 +571,7 @@ print(profiles_page.soup)</code></pre></div>
                         <li>Let us identify what is needed</li>
                         <li>
                         <ul>
-                            <li>What is the source of the data? <br/><strong><a href="http://finance.yahoo.com/q?s=yhoo">http://finance.yahoo.com/q?s=yhoo</a></strong></li>
+                            <li>What is the source of the data? <br/><strong><a href="https://www.bloomberg.com/quote/YHOO:US">https://www.bloomberg.com/quote/YHOO:US</a></strong></li>
 
                             <li>What do we want to extract from this source? <br/><strong>The stock price</strong></li>
 
@@ -584,11 +584,9 @@ print(profiles_page.soup)</code></pre></div>
                     <h3>Use case: fetching the stock quote from Yahoo finance (2)</h3>
 
                     <ul>
-                        <li>If we look at the source code, we can see what is the tag for the stock and how to retrieve it:</li>
-                        <li><div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">&lt;span class="time_rtq_ticker"&gt;
-    &lt;span id="yfs_l84_yhoo"&gt;40.01&lt;&#47;span&gt;
-&lt;&#47;span&gt;</code></pre></div></li>
-                        <li>We check that &lt;span id="yfs_l84_yhoo"&gt; only appears once in the webpage since
+                        <li>If we look at the source code, we can see what the tag is for the stock and how to retrieve it:</li>
+                        <li><div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">&lt;div class="price"&gt;40.08&lt;/div&gt;</code></pre></div></li>
+                        <li>We check that &lt;div class="price"&gt; only appears once in the webpage since
                             it will be a way to identify the location of the current price</li>
 
                     </ul>
@@ -600,11 +598,11 @@ print(profiles_page.soup)</code></pre></div>
                     <div><pre class="solution-content python"><code style="line-height: 100%;font-size: 26px;">import mechanicalsoup
 
 my_browser = mechanicalsoup.Browser()
-page = my_browser.get("http://finance.yahoo.com/q?s=yhoo")
+page = my_browser.get("https://www.bloomberg.com/quote/YHOO:US")
 html_text = page.soup
 # return a list of all the tags where
-# the id is 'yfs_184_yhoo'
-my_tags = html_text.select("#yfs_l84_yhoo")
+# the css class is 'price'
+my_tags = html_text.select(".price")
 # take the BeautifulSoup string out of the
 # first (and only) &lt;span&gt; tag
 my_price = my_tags[0].text
@@ -616,11 +614,10 @@ print("The current price of "
                 <section>
                     <h3>Repeatedly get the Yahoo current price</h3>
                     <ul>
-                        <li>Now that we know how to get the price of a stock from the Yahoo web page, we can create a for loop to stay up to date</li>
-                        <li>Note that we should not overload the Yahoo website with more requests than we need. And also, we should also have a look at their
-                            <a href="https://policies.yahoo.com/us/en/yahoo/terms/utos/index.htm">Terms of use</a> to be sure that what we do is allowed</li>
-                        <li>The terms state that we should not "use the Yahoo! Finance Modules in a manner that exceeds reasonable request volume [or]
-                            constitutes excessive or abusive usage,"</li>
+                        <li>Now that we know how to get the price of a stock from the Bloomberg web page, we can create a for loop to stay up to date</li>
+                        <li>Note that we should not overload the Bloomberg website with more requests than we need. And also, we should also have a look at their
+                            <a href="https://www.bloomberg.com/robots.txt">robots.txt</a> file to be sure that what we do is allowed
+                        </li>
                     </ul>
                 </section>
 
@@ -643,10 +640,10 @@ import mechanicalsoup
 my_browser = mechanicalsoup.Browser()
 # obtain 1 stock quote per minute for the next 3 minutes
 for i in range(0, 3):
-    page = my_browser.get("http://finance.yahoo.com/q?s=yhoo")
+    page = my_browser.get("https://www.bloomberg.com/quote/YHOO:US")
     html_text = page.soup
-    # return a list of all the tags where the id is 'yfs_184_yhoo'
-    my_tags = html_text.select("#yfs_l84_yhoo")
+    # return a list of all the tags where the class is 'price'
+    my_tags = html_text.select(".price")
     # take the BeautifulSoup string out of the first tag
     my_price = my_tags[0].text
     print("The current price of YHOO is: {}".format(my_price))
