@@ -60,7 +60,7 @@
                     </ul>
                 </section>
 
-                <section>
+                <section id="inheritance-diagram">
                     <h3>UML representation of inheritance</h3>
                     <img src="imgs/uml_inheritance.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 450px"/>
                 </section>
@@ -81,8 +81,7 @@
                     <ul>
                         <li><a href="exercises/GeometricObject.py">GeometricObject.py</a></li>
                         <li><a href="exercises/CircleDerivedFromGeometricObject.py">CircleDerivedFromGeometricObject.py</a></li>
-                        <li><a href="exercises/RectangleDerivedFromGeometricObject.py">RectangleDerivedFromGeometricObject.py</a></li>
-                        <li><a href="exercises/TestCircleRectangle.py">TestCircleRectangle.py</a></li>
+                        <li><a href="exercises/TestCircle.py">TestCircle.py</a></li>
                     </ul>
                 </section>
 
@@ -109,16 +108,54 @@ main()</code></pre></div>
                 </section>
 
                 <section>
+                    <h3>Exercise: create a Rectangle Class inheriting from GeometricObject</h3>
+                    <ul>
+                        <li>We already have the <a href="#/inheritance-diagram">class diagram</a></li>
+                        <li>We want to be able to run this script: <a href="exercises/TestCircleRectangle.py">TestCircleRectangle.py</a></li>
+                        <li>Create the file <string>RectangleDerivedFromGeometricObject.py</string> in which you will create the class <strong>Rectangle inheriting from GeometricObject</strong></li>
+                    </ul>
+                    <div class="solution">
+                        <p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+                        <p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+                        <p class="solution-content python"><a href="exercises/RectangleDerivedFromGeometricObject.py">RectangleDerivedFromGeometricObject.py</a></p>
+                    </div>
+                </section>
+
+                <section>
                     <h3>Overriding Methods</h3>
                     <p>A subclass inherits methods from a superclass. Sometimes it is necessary for
 the subclass to modify the implementation of a method defined in the
 superclass. This is referred to as <strong>method overriding</strong>. </p>
+                    <p>__str__ is a special method used to represent the object</p>
                     <div><pre class="solution-content python"><code>class Circle(GeometricObject):
-    # Other methods are omitted
     # Override the __str__ method defined in GeometricObject
     def __str__(self):
         return super().__str__() + " radius: " + \
-            str(radius)</code></pre></div>
+            str(self.__radius)</code></pre></div>
+                </section>
+
+                <section>
+                    <h3>Exercise: override the __str__ method</h3>
+                    <p>For the class rectangle, override the class __str__ so that when I print a rectangle object it says "Rectangle of area 4 and perimeter 8"</p>
+                    <div class="solution">
+                        <p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution using "+" concatenation</p>
+                        <p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+                        <pre class="solution-content python"><code style="line-height: 100%;">def __str__(self):
+    return "Rectangle of area " + str(self.getArea()) +\
+           " and of perimeter " + str(self.getPerimeter())</code></pre>
+                    </div>
+                    <div class="solution">
+                        <p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution using format()</p>
+                        <p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+                        <pre class="solution-content python"><code style="line-height: 100%;">def __str__(self):
+    return "Rectangle of area {:.2f} and of perimeter {:.2f}".format(
+        self.getArea(), self.getPerimeter())</code></pre>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Learn more about string formatting</h3>
+                    <p>Many ways to format strings in python, see this website: <a href="https://pyformat.info/">https://pyformat.info/</a></p>
                 </section>
 
                 <section>
@@ -186,9 +223,24 @@ always pass an instance of a subclass to a parameter of its superclass type. </l
                         <ul style="font-size: 28px">
                             <li><a href="exercises/PolymorphismDemo.py"> PolymorphismDemo.py</a> <a href="exercises/RectangleFromGeometricObject.py">RectangleFromGeometricObject.py</a> <a href="exercises/CircleFromGeometricObject.py">CircleFromGeometricObject.py</a>
                             </li>
-                            <li><a href="exercises/Animals.py">Animals.py</a></li>
                         </ul>
                     </ul>
+                </section>
+
+                <section>
+                    <h3>Exercise: Polymorphism</h3>
+                    <ul>
+                        <li>Create 3 classes in a polymorphic way</li>
+                        <li>Complete the following script:</li>
+                        <ul style="font-size: 28px">
+                            <li><a href="exercises/Animals_incomplete.py">Animals_incomplete.py</a></li>
+                        </ul>
+                    </ul>
+                    <div class="solution">
+                        <p class="show-solution"><i class="fa fa-eye" aria-hidden="true"></i>Solution</p>
+                        <p class="hide-solution" style="margin-top: 0px; margin-bottom: 0px;"><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide solution</p>
+                        <p class="solution-content python"><a href="exercises/RectangleDerivedFromGeometricObject.py"><a href="exercises/Animals.py">Animals.py</a></p>
+                    </div>
                 </section>
 
                 <section>
@@ -365,8 +417,6 @@ relationship between two classes. Aggregation models the has-a relationship. If
 an object is exclusively owned by an aggregated object, the relationship
 between the object and its aggregated object is referred to as composition. </li>
                         <img src="imgs/aggregation_composition.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 250px"/>
-                        <li>An aggregation relationship is usually represented as a data field in the
-aggregated class.</li>
                     </ul>
                 </section>
 
@@ -396,18 +446,7 @@ may have a supervisor. </li>
                         <li>Syntax for multiple inheritance:</li>
                         <div><pre class="solution-content python"><code data-trim data-noescape  style="line-height: 100%;font-size: 24px;">class Child(ParentA, ParentB):
     # rest of the class</code></pre></div>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>The Course Class</h3>
-                    <ul>
-                        <img src="imgs/course_class.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 350px"/>
-                        <li>See the programs:
-                            <ul>
-                                <li><a href="exercises/TestCourse.py">TestCourse.py</a> to see how it is used</li>
-                                <li><a href="exercises/Course.py">Course.py</a> to see how it is implemented</li>
-                             </ul>
+                        <li>Note: as soon as we explicitly inherits from a class, we are in the case of multiple inheritance because in python all classes inherits from <strong>object</strong> by default</li>
                     </ul>
                 </section>
 

@@ -1,5 +1,4 @@
 from CircleDerivedFromGeometricObject import Circle
-from RectangleDerivedFromGeometricObject import Rectangle
 
 
 def main():
@@ -9,10 +8,5 @@ def main():
     print("The area is", circle.getArea())
     print("The diameter is", circle.getDiameter())
 
-    rectangle = Rectangle(2, 4)
-    print("\nA rectangle", rectangle)
-    print("The area is", rectangle.getArea())
-    print("The perimeter is", rectangle.getPerimeter())
 
-
-main()  # Call the main function
+main()
