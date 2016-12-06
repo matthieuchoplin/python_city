@@ -217,6 +217,25 @@ if __name__ == '__main__':
 				</section>
 
 				<section>
+					<h3>The setUp() method</h3>
+					<p>Method called to prepare the test fixture. This is called immediately before calling the test method. The default implementation does nothing.</p>
+				</section>
+
+				<section>
+					<h3>The tearDown() method</h3>
+					<p>Method called immediately after the test method has been called and the result recorded. This is called even if the test method raised an exception.
+						The default implementation does nothing.</p>
+				</section>
+
+				<section>
+					<h3>The assert methods</h3>
+					<img src="imgs/assertmethods.png"/>
+					<ul>
+						<li>Many others: <a href="https://docs.python.org/3.6/library/unittest.html#unittest.TestCase.assertEqual">https://docs.python.org/3.6/library/unittest.html</a></li>
+					</ul>
+				</section>
+
+				<section>
 					<h3>Solution</h3>
 					<p><a href="exercises/session_10_debugging_solution.py">session_10_debugging_solution.py</a></p>
 					<p><a href="exercises/test_session_10_debugging_solution.py">test_session_10_debugging_solution.py</a></p>
