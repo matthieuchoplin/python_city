@@ -39,10 +39,13 @@
 					<h3>Objectives</h3>
 					<ul>
 						<li>Debugging</li>
+						<li>Using a virtual environment</li>
 						<li>Testing</li>
+						<li>Understand the purpose of using Version Control System</li>
 						<li>Introduction to Database Connection</li>
 					</ul>
 				</section>
+
 
 				<section>
 					<h3>Debugging</h3>
@@ -97,6 +100,45 @@ if __name__ == '__main__':
     my_list = sort_list(my_list)
     print(my_list)  # [0, 1, 2, 3, 4, 5, 6, 7, 8]</code></pre></div>
                 </section>
+
+				<section>
+					<h3>Using a virtual environment</h3>
+					<ul>
+						<li>Some applications use a complete dedicated machine to be installed and run</li>
+						<li>But you may want to run different python versions with different libraries on the same machine</li>
+						<li>From Python3.6, you can use:</li>
+						<div><pre class="solution-content python"><code>python3 -m venv /path/to/new/virtual/environment</code></pre></div>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Using a virtual environment: Note</h3>
+					<ul>
+						<li>Before Python3.6, you could use <strong>pyvenv</strong>:</li>
+						<div><pre class="solution-content python"><code>pyvenv /path/to/new/virtual/environment</code></pre></div>
+						<li>Before pyvenv, we would use an external library called <strong>virtualenv</strong>. If you are working with python2, this is what you should use</li>
+						<li>More on virtual environment: <a href="https://docs.python.org/3.7/library/venv.html">https://docs.python.org/3.7/library/venv.html</a> </li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Virtualenv for Python2 programs</h3>
+					<ul style="line-height: 80%;">
+						<li>If not installed, install it with pip</li>
+						<div><pre class="solution-content python"><code>pip install virtualenv</code></pre></div>
+						<li>Create the virtual environment</li>
+						<div><pre class="solution-content python"><code>virtualenv -p /path/to/python2.7 venv</code></pre></div>
+						<li>Activate it</li>
+						<div><pre class="solution-content python"><code>source venv/bin/activate</code></pre></div>
+						<li>Install the required libraries</li>
+						<div><pre class="solution-content python"><code>pip install openpyxl</code></pre></div>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Virtualenv in Pycharm</h3>
+					<img src="imgs/venv_pycharm.png" style="height: 500px;"/>
+				</section>
 
                 <section>
                     <h3>Testing</h3>
@@ -199,6 +241,34 @@ if __name__ == '__main__':
 						<li>Use <strong>coverage report</strong> to report on the results:</li>
 						<div><pre class="solution-content python"><code>$ coverage report -m</code></pre></div>
 						<li>Also possible <a href="https://www.jetbrains.com/help/pycharm/2016.1/running-with-coverage.html">in Pycharm</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Version Control System, why</h3>
+					<ul>
+						<li>Keep track of the changes happening in your project</li>
+						<li>Experiment things and making changes with confidence, and even reverting when needed.</li>
+						<li>Work in team with files and directory structure that are consistent for all team members and communicating</li>
+						<li>Understand who made a change and why it happened</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Version Control System, how</h3>
+					<ul>
+						<li>Different tools exist but the most common used today is <strong>Git</strong> that you can use with Github.com or BitBucket.com</li>
+						<li>Git is a decentralized VCS, as opposed to SVN (the previous generation of VCS)</li>
+						<li>Example of a branching strategy: the Feature Branch Workflow</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h3>To go further on using a VCS</h3>
+					<ul>
+						<li>See the different workflow strategies here: <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/">https://www.atlassian.com/git/tutorials/comparing-workflows/</a></li>
+						<li><a href="https://try.github.io/levels/1/challenges/1">Learn the git command</a></li>
 					</ul>
 				</section>
 
