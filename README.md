@@ -1,1 +1,5 @@
-/work/decktape$./bin/phantomjs decktape.js reveal http://localhost:63342/python_city/session1.html#/ ~/work/python_city/pdf/session1.pdf
+To create a pdf out of the slides use: https://github.com/astefanutti/decktape
+
+./phantomjs decktape.js reveal http://mattchoplin.com/python_city/session100.html#/ /home/mattchoplin/PycharmProjects/python_city/pdf/session1.pdf
+
+
