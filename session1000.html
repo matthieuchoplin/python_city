@@ -38,14 +38,140 @@
 				<section>
 					<h3>Objectives</h3>
 					<ul>
+						<li>Introduction to Database Connection</li>
 						<li>Debugging</li>
 						<li>Using a virtual environment</li>
 						<li>Testing</li>
 						<li>Understand the purpose of using Version Control System</li>
-						<li>Introduction to Database Connection</li>
 					</ul>
 				</section>
 
+				<section>
+					<h3>Introduction to SQL Database Connection (1)</h3>
+					<ul>
+						<li>You will use databases when you want to structure your data using tables and fields and
+							<strong>persist them in memory</strong>.</li>
+						<li>The data stored in database will remain even if you close your program.</li>
+						<li>You can visualize what a database is by comparing it to a spreadsheet where the file will be the table, the header of the rows will
+							be the fields or columns and the rest of the rows will be the data stored in this table</li>
+						<li>The simplest version of SQL is SQLite, we can interact with it through the module <strong>sqlite3</strong></li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (2)</h3>
+					<ul>
+						<li>We need to import the module and connect to a database (that will be created if it does not exist).</li>
+						<div><pre class="solution-content python"><code>import sqlite3
+
+connection = sqlite3.connect("test_database.db")</code></pre></div>
+					</ul>
+					<p>NB: the data created will be stored in the file <strong>test_database.db</strong> that is actually the database</p>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (3)</h3>
+					<p>We then need a <strong>cursor</strong> to execute commands on the database</p>
+					<div><pre class="solution-content python"><code style="line-height: 100%;">import sqlite3
+
+connection = sqlite3.connect("test_database.db")
+cursor = connection.cursor()
+# We create our first TABLE People that will
+# store the field FirstName, LastName and Age
+cursor.execute(
+    "CREATE TABLE People("
+    "FirstName TEXT, "
+    "LastName TEXT, "
+    "AGE INT)")</code></pre></div>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (4)</h3>
+					<p>Imagine that the TABLE we have created is like a spreadsheet file ready to take data</p>
+					<p>It means that we can now insert data into this table with the "INSERT" command</p>
+					<div><pre class="solution-content python"><code>cursor.execute("INSERT INTO People "
+               "VALUES ('Ron', 'Obvious', 42)")
+# we have to commit to actually
+# save the record in database
+connection.commit()</code></pre></div>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (5)</h3>
+					<p>When working with database, it is a good idea to  use the <strong>with</strong>
+						keyword to simplify your code, similar to how we used the <strong>with</strong> to open files</p>
+					<div><pre class="solution-content python"><code>with sqlite3.connect("test_database.db") as connection:
+	# perform any SQL operation</code></pre></div>
+					<p>Also, you will no longer need to use the <strong>commit()</strong> explicitly</p>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (6)</h3>
+					<p>Imagine that you want to concatenate a string with a SQL command</p>
+					<p>Do not do this:</p>
+					<div><pre class="solution-content python"><code>first_name, last_name, age = 'John', 'Doe', 21
+with sqlite3.connect("test_database.db") as connection:
+    cursor = connection.cursor()
+    cursor.execute(
+        "INSERT INTO People VALUES"
+        "('"+ first_name + "', '" + last_name + "', " + str(age) + ")")</code></pre></div>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (7)</h3>
+					<p>The database is correctly updated, you can check that with the following command</p>
+					<div><pre class="solution-content python"><code>with sqlite3.connect("test_database.db") as connection:
+    cursor = connection.cursor()
+	cursor.execute("SELECT * FROM People")
+    rows = cursor.fetchall()
+    print(rows)</code></pre></div>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (8)</h3>
+					<p>Using the same method as 2 slides before, what happen if we try to add a user with the LastName "O'Connor"?</p>
+					<div><pre class="solution-content python"><code>first_name, last_name, age = 'John', 'O\'Connor', 21
+with sqlite3.connect("test_database.db") as connection:
+    cursor = connection.cursor()
+    cursor.execute(
+        "INSERT INTO People VALUES"
+        "('"+ first_name + "', '" + last_name + "', " + str(age) + ")")</code></pre></div>
+					<p>We will get an error because the "'"</p>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (9)</h3>
+					<img src="imgs/exploits_of_a_mom.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 280px"/>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (10)</h3>
+					<p>To avoid SQL injection, use the following instead:</p>
+					<div><pre class="solution-content python"><code>first_name, last_name, age = 'John', 'O\'Connor', 21
+with sqlite3.connect("test_database.db") as connection:
+    cursor = connection.cursor()
+    cursor.execute(
+        "INSERT INTO People VALUES"
+        "(?, ?, ?)", (first_name, last_name, age))
+    cursor.execute("SELECT * FROM People")
+    rows = cursor.fetchall()
+    print(rows)</code></pre></div>
+				</section>
+
+				<section>
+					<h3>Introduction to SQL Database Connection (11)</h3>
+					<p>The question marks act as a placeholder for the (first_name, last_name, age) tuple; this is called a
+					<strong>parameterized statement</strong>. You should always used parameterized SQL statement</p>
+					<p>File used for the example: <a href="exercises/test_db.py">test_db.py</a></p>
+				</section>
+
+				<section>
+					<h3>Exercise</h3>
+					<ul>
+						<li>Populate the database with additional records</li>
+						<li>Display the People who are older than 18 using a <a href="http://www.w3schools.com/sql/sql_where.asp">select command</a> and a cr.fetchall()</li>
+					</ul>
+				</section>
 
 				<section>
 					<h3>Debugging</h3>
@@ -288,133 +414,6 @@ if __name__ == '__main__':
 					<ul>
 						<li>See the different workflow strategies here: <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/">https://www.atlassian.com/git/tutorials/comparing-workflows/</a></li>
 						<li><a href="https://try.github.io/levels/1/challenges/1">Learn the git command</a></li>
-					</ul>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (1)</h3>
-					<ul>
-						<li>You will use databases when you want to structure your data using tables and fields and
-							<strong>persist them in memory</strong>.</li>
-						<li>The data stored in database will remain even if you close your program.</li>
-						<li>You can visualize what a database is by comparing it to a spreadsheet where the file will be the table, the header of the rows will
-							be the fields or columns and the rest of the rows will be the data stored in this table</li>
-						<li>The simplest version of SQL is SQLite, we can interact with it through the module <strong>sqlite3</strong></li>
-					</ul>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (2)</h3>
-					<ul>
-						<li>We need to import the module and connect to a database (that will be created if it does not exist).</li>
-						<div><pre class="solution-content python"><code>import sqlite3
-
-connection = sqlite3.connect("test_database.db")</code></pre></div>
-					</ul>
-					<p>NB: the data created will be stored in the file <strong>test_database.db</strong> that is actually the database</p>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (3)</h3>
-					<p>We then need a <strong>cursor</strong> to execute commands on the database</p>
-					<div><pre class="solution-content python"><code style="line-height: 100%;">import sqlite3
-
-connection = sqlite3.connect("test_database.db")
-cursor = connection.cursor()
-# We create our first TABLE People that will
-# store the field FirstName, LastName and Age
-cursor.execute(
-    "CREATE TABLE People("
-    "FirstName TEXT, "
-    "LastName TEXT, "
-    "AGE INT)")</code></pre></div>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (4)</h3>
-					<p>Imagine that the TABLE we have created is like a spreadsheet file ready to take data</p>
-					<p>It means that we can now insert data into this table with the "INSERT" command</p>
-					<div><pre class="solution-content python"><code>cursor.execute("INSERT INTO People "
-               "VALUES ('Ron', 'Obvious', 42)")
-# we have to commit to actually
-# save the record in database
-connection.commit()</code></pre></div>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (5)</h3>
-					<p>When working with database, it is a good idea to  use the <strong>with</strong>
-						keyword to simplify your code, similar to how we used the <strong>with</strong> to open files</p>
-					<div><pre class="solution-content python"><code>with sqlite3.connect("test_database.db") as connection:
-	# perform any SQL operation</code></pre></div>
-					<p>Also, you will no longer need to use the <strong>commit()</strong> explicitly</p>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (6)</h3>
-					<p>Imagine that you want to concatenate a string with a SQL command</p>
-					<p>Do not do this:</p>
-					<div><pre class="solution-content python"><code>first_name, last_name, age = 'John', 'Doe', 21
-with sqlite3.connect("test_database.db") as connection:
-    cursor = connection.cursor()
-    cursor.execute(
-        "INSERT INTO People VALUES"
-        "('"+ first_name + "', '" + last_name + "', " + str(age) + ")")</code></pre></div>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (7)</h3>
-					<p>The database is correctly updated, you can check that with the following command</p>
-					<div><pre class="solution-content python"><code>with sqlite3.connect("test_database.db") as connection:
-    cursor = connection.cursor()
-	cursor.execute("SELECT * FROM People")
-    rows = cursor.fetchall()
-    print(rows)</code></pre></div>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (8)</h3>
-					<p>Using the same method as 2 slides before, what happen if we try to add a user with the LastName "O'Connor"?</p>
-					<div><pre class="solution-content python"><code>first_name, last_name, age = 'John', 'O\'Connor', 21
-with sqlite3.connect("test_database.db") as connection:
-    cursor = connection.cursor()
-    cursor.execute(
-        "INSERT INTO People VALUES"
-        "('"+ first_name + "', '" + last_name + "', " + str(age) + ")")</code></pre></div>
-					<p>We will get an error because the "'"</p>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (9)</h3>
-					<img src="imgs/exploits_of_a_mom.png" style="background:none; border:none; box-shadow:none; margin-top:0px;height: 280px"/>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (10)</h3>
-					<p>To avoid SQL injection, use the following instead:</p>
-					<div><pre class="solution-content python"><code>first_name, last_name, age = 'John', 'O\'Connor', 21
-with sqlite3.connect("test_database.db") as connection:
-    cursor = connection.cursor()
-    cursor.execute(
-        "INSERT INTO People VALUES"
-        "(?, ?, ?)", (first_name, last_name, age))
-    cursor.execute("SELECT * FROM People")
-    rows = cursor.fetchall()
-    print(rows)</code></pre></div>
-				</section>
-
-				<section>
-					<h3>Introduction to SQL Database Connection (11)</h3>
-					<p>The question marks act as a placeholder for the (first_name, last_name, age) tuple; this is called a
-					<strong>parameterized statement</strong>. You should always used parameterized SQL statement</p>
-					<p>File used for the example: <a href="exercises/test_db.py">test_db.py</a></p>
-				</section>
-
-				<section>
-					<h3>Exercise</h3>
-					<ul>
-						<li>Populate the database with additional records</li>
-						<li>Display the People who are older than 18 using a <a href="http://www.w3schools.com/sql/sql_where.asp">select command</a> and a cr.fetchall()</li>
 					</ul>
 				</section>
 
